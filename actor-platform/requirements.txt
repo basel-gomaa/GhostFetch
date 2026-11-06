@@ -1,0 +1,44 @@
+# Platform dependencies (API + queue). Install into a venv:
+#
+#     python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+#
+# The executor, registry and `runs` CLI remain standard-library only and run
+# under a plain python3. Only the API needs these.
+fastapi>=0.162.0
+uvicorn>=0.30
+
+# Validates submitted input against each Actor's declared input_schema.json, so
+# a bad request is a 400 instead of a container that fails seconds later.
+jsonschema>=4.20
+
+# Only needed when ACTOR_QUEUE_URL points at Redis. The default file-backed
+# queue needs nothing, so the platform runs with no infrastructure at all.
+redis>=5.0
+
+
+# Authenticated encryption for stored social-media sessions (shared/crypto.py).
+# AES-256-GCM, so a tampered ciphertext fails to decrypt rather than decrypting
+# into something else. Also supplies the HKDF used to derive the console's
+# cookie-signing key from the same secret.
+cryptography>=42
+
+# The database. Plain SQL, no ORM -- the transition guard is one UPDATE and is
+# the part a reader most needs to see unobscured.
+psycopg[binary,pool]>=3.2
+
+# Password hashing for user accounts. argon2id, the current recommendation; used
+# ONLY for passwords (API keys are 256-bit random, so they get a fast sha256).
+argon2-cffi>=23.1
+
+# The login-browser proxy. The API pumps bytes between the user's noVNC client
+# and their own container's VNC port, so it needs a websocket CLIENT as well as
+# the server side uvicorn provides.
+websockets>=17.3
+
+# Talks to a login container's control API on loopback, and proxies the noVNC
+# client's static assets. Already a transitive dependency of the test client;
+# named here because the API now depends on it directly.
+httpx>=0.27
+
+# Actors declare their OWN dependencies in actors/<name>/requirements.txt and
+# never share this file.

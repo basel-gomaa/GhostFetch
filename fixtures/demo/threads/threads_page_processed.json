@@ -1,0 +1,66 @@
+{
+  "page_name": "Demo User 668",
+  "username": "Demo User 188",
+  "followers_count": 5719964,
+  "scrape_date": "2026-08-29T18:53:00.906586+00:00",
+  "statistics": {
+    "total_posts": 2,
+    "total_likes": 4581,
+    "total_comments": 1562,
+    "total_shares": 342,
+    "average_likes": 2290.5,
+    "average_comments": 781.0,
+    "average_shares": 171.0,
+    "posting_frequency": {
+      "first_post": "2026-01-12",
+      "last_post": "2026-01-12",
+      "days_covered": 1,
+      "posts_per_week": 14.0,
+      "posts_per_day": 2.0
+    }
+  },
+  "content_breakdown": {
+    "text": 2,
+    "image": 0,
+    "video": 0,
+    "carousel": 0,
+    "quote": 0,
+    "unknown": 0
+  },
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/52dfe007a28d",
+      "caption": "Sample sample sit content amet lorem example lorem placeholder demo sit text ipsum example post comment reply reply reply dolor content amet post comment dolor text ipsum placeholder amet lorem placeholder amet post comment reply dolor content amet post ipsum",
+      "post_date": "2026-01-12T18:00:30+00:00",
+      "likes": 2948,
+      "shares": 245,
+      "comments_count": 966,
+      "engagement_score": 4159,
+      "content_type": "text"
+    },
+    {
+      "post_url": "https://example.com/demo/2caef36ece0c",
+      "caption": "Post ipsum example post ipsum placeholder amet lorem placeholder demo sit text comment reply dolor content amet post ipsum example lorem example post comment reply dolor content amet post comment reply reply dolor text comment dolor content demo sit content",
+      "post_date": "2026-01-12T13:46:31+00:00",
+      "likes": 1633,
+      "shares": 97,
+      "comments_count": 596,
+      "engagement_score": 2326,
+      "content_type": "text"
+    }
+  ],
+  "date_window": {
+    "start": "2026-01-01",
+    "end": "2026-02-01",
+    "requested": "Text comment reply",
+    "scanned_pages": 3,
+    "oldest_seen": "2024-09-17T12:50:46+00:00",
+    "newest_seen": "2026-08-10T10:01:59+00:00",
+    "reach_oldest": "2024-09-17T12:50:46+00:00",
+    "window_reached": true,
+    "estimated_pages_needed": null,
+    "page_budget": null,
+    "complete": true,
+    "stop_reason": "window_cleared"
+  }
+}

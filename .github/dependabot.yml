@@ -1,0 +1,80 @@
+# Automated dependency-update pull requests. Each one runs CI. After merging a
+# pip bump, regenerate the lock files with scripts/freeze_lock.sh from a venv
+# that has the new version.
+#
+# GROUPS exist for packages that only work as a pair. Sent separately, each
+# half fails CI on its own and can never go green: react-dom 19 without react
+# 19 (#47, merged red, broke main until #50), vite 8 without
+# @vitejs/plugin-react (#56). A group makes them one PR that passes or fails
+# together.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+  - package-ecosystem: pip
+    directory: "/actor-platform"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+  # THE IMAGES' OWN PACKAGES. Each image has requirements.in (what it depends
+  # on) and requirements.txt, pip-compile's hashed lock of it, which its
+  # Dockerfile installs with --require-hashes; Dependabot recognises the pair
+  # and rewrites the lock. Re-lock by hand with scripts/image_locks.py.
+  # Every image directory must be listed in one of the two entries below
+  # (actor-platform/test_actor_images.py checks it).
+  #
+  # TWO ENTRIES because Playwright cannot move alone in three of them: built
+  # FROM the Playwright image, they must install exactly that image's version
+  # (test_actor_images.py), so there it moves with the docker base-images
+  # group below, and pyee with it.
+  - package-ecosystem: pip
+    directories:
+      - "/actor-platform/actors/instagram"
+      - "/actor-platform/actors/linkedin"
+      - "/actor-platform/actors/x"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      image-packages:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "playwright"
+      - dependency-name: "pyee"
+  - package-ecosystem: pip
+    directories:
+      - "/actor-platform/actors/facebook"
+      - "/actor-platform/actors/facebook_groups"
+      - "/actor-platform/actors/hello_world"
+      - "/actor-platform/actors/item_processor"
+      - "/actor-platform/actors/threads"
+      - "/actor-platform/actors/tiktok"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      image-packages:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: "/actor-platform/ui/console"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      # react-dom checks its peer react version exactly; the @types track them.
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      # @vitejs/plugin-react declares a peer range of vite majors.
+      vite:
+        patterns: ["vite", "@vitejs/*"]
+  - package-ecosystem: docker
+    directories:
+      - "/actor-platform/actors/*"
+    schedule: { interval: weekly }
+    groups:
+      # One PR moves every image's base together. The three browser Actors pin
+      # the same Playwright image, and bumping one Actor alone leaves them
+      # running different browsers.
+      base-images:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule: { interval: monthly }

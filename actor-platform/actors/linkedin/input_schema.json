@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "linkedin",
+  "description": "Scrapes posts, and optionally comments, from a LinkedIn company page, person's profile or hashtag feed. A date range is a window the run must COVER, not merely filter to: with start_date/end_date and no max_posts, the run collects every post in the range and reports whether it managed to cover it. Needs an authenticated session, forwarded to the Worker as LINKEDIN_SESSION.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "A company ('lumen', or a linkedin.com/company/... URL), a person ('lumen', or a /in/... URL), or a hashtag ('#ai' or 'ai') - matching the mode below."
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "company",
+        "profile",
+        "hashtag"
+      ],
+      "description": "What the target names. Defaults to 'company'. A company target additionally yields a Company Overview section in the report (description, industry, size, HQ, specialties), which the other two have no equivalent of."
+    },
+    "max_posts": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on posts returned. OMIT IT when using a date range: the range is then the stopping condition, and a count here would cut the window short."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or after this moment (UTC, inclusive). A bare date means midnight."
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or before this moment (UTC, inclusive). A bare date means end of day."
+    },
+    "collect_comments": {
+      "type": "boolean",
+      "description": "Also collect each post's comments. Comments come from each post's PUBLIC page and need no session, so this stage is fast - but the public page serves only a variable subset (measured: 4 of 6, 6 of 10, 9 of 41, 10 of 26). Each post records what it was actually served, so a short count is never mistaken for a failure."
+    },
+    "max_comments_per_post": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on comments per post. Often unreachable on the public page - see collect_comments."
+    },
+    "deep_comments": {
+      "type": "boolean",
+      "description": "Go past the public page's ceiling by re-opening each short post in the authenticated browser. Defaults to false because it costs 30-50 SECONDS per topped-up post against roughly 0.3s for the public page. Headless renders some posts' comment lists and not others, so this is the one option that may return less than it should in a container."
+    },
+    "analyse": {
+      "type": "boolean",
+      "description": "Also produce an AI analysis and report (text, PDF and an HTML dashboard) alongside the data. Defaults to true. Costs two Claude calls; the scrape itself is unaffected either way."
+    },
+    "ai_prompt": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Your own analysis instructions, e.g. 'focus on complaints about delivery times'. Added to the built-in brief rather than replacing it, so the report keeps its structure and always renders."
+    }
+  },
+  "required": [
+    "target"
+  ],
+  "x-date-window": {
+    "start": "start_date",
+    "end": "end_date"
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,293 @@
+{
+  "platform": "X",
+  "scraper": "Content",
+  "status": "success",
+  "page_information": {
+    "user_id": "102770428",
+    "page_name": "Demo User 977",
+    "username": "Demo User 888",
+    "page_url": "https://example.com/demo/103bef0af6df",
+    "followers_count": 36853,
+    "following_count": 107,
+    "posts_count": 3092,
+    "description": "Example lorem example post ipsum example post comment dolor text ipsum example lorem example post comment reply dolor",
+    "location": "Text comment",
+    "verified": true,
+    "verified_type": null,
+    "avatar": "https://example.com/demo/a5cd95f35738",
+    "created_at": "2010-12-16T08:40:07+00:00",
+    "scrape_date": "2026-09-02T17:34:17.089599+00:00"
+  },
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/ef45a42e95cd",
+      "tweet_id": "7777758382493620888",
+      "shortcode": "7777758382493620888",
+      "media_id": "7777758382493620888",
+      "post_date": "2026-08-12T08:00:00+00:00",
+      "caption": "Sit text comment dolor content amet post ipsum placeholder demo sample sample sample sit text comment reply dolor text comment dolor content demo sit text ipsum example post comment dolor content demo sample sample sit text comment",
+      "content_type": "video",
+      "media": [
+        {
+          "media_id": "7777114559990930904",
+          "type": "video",
+          "url": "https://example.com/demo/735ce37db460",
+          "alt_text": null,
+          "video_url": "https://example.com/demo/288f1d6320f7",
+          "video_duration_ms": 99080
+        }
+      ],
+      "likes": 4,
+      "comments_count": 0,
+      "shares": 2,
+      "views": 316,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 6,
+      "engagement_rank": 9
+    },
+    {
+      "post_url": "https://example.com/demo/d14879d46d51",
+      "tweet_id": "7777742374597049215",
+      "shortcode": "7777742374597049215",
+      "media_id": "7777742374597049215",
+      "post_date": "2026-09-02T15:47:21+00:00",
+      "caption": "Lorem placeholder demo sit content demo sample sit content demo sample sample sample sit content demo sit text ipsum placeholder amet post ipsum example lorem placeholder amet lorem example post comment reply dolor content amet post comment dolor content demo",
+      "content_type": "photo",
+      "media": [
+        {
+          "media_id": "7777123451547703827",
+          "type": "photo",
+          "url": "https://example.com/demo/9f95e4baa8f2",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777224535912790845",
+          "type": "photo",
+          "url": "https://example.com/demo/d4a3f73b3877",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777764820418009881",
+          "type": "photo",
+          "url": "https://example.com/demo/cda88a3a2b78",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777714661071908909",
+          "type": "photo",
+          "url": "https://example.com/demo/bd618f270a2e",
+          "alt_text": null
+        }
+      ],
+      "likes": 0,
+      "comments_count": 0,
+      "shares": 0,
+      "views": 122,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 0,
+      "engagement_rank": 18
+    },
+    {
+      "post_url": "https://example.com/demo/14b3a0bf671e",
+      "tweet_id": "7777723253357909106",
+      "shortcode": "7777723253357909106",
+      "media_id": "7777723253357909106",
+      "post_date": "2026-09-02T14:30:12+00:00",
+      "caption": "Comment dolor content demo sit text comment reply reply dolor content demo sample sit content demo sit content amet post ipsum placeholder demo sample sit text comment reply reply reply dolor text comment dolor content amet",
+      "content_type": "video",
+      "media": [
+        {
+          "media_id": "7777778968974345703",
+          "type": "video",
+          "url": "https://example.com/demo/711dd2c61ea0",
+          "alt_text": null,
+          "video_url": "https://example.com/demo/d1e7d61b9894",
+          "video_duration_ms": 76440
+        }
+      ],
+      "likes": 5,
+      "comments_count": 0,
+      "shares": 2,
+      "views": 232,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 7,
+      "engagement_rank": 7
+    },
+    {
+      "post_url": "https://example.com/demo/ff3142db9568",
+      "tweet_id": "7777779035597478753",
+      "shortcode": "7777779035597478753",
+      "media_id": "7777779035597478753",
+      "post_date": "2026-08-30T10:36:10+00:00",
+      "caption": "Sample sample sample sit text ipsum placeholder demo sit content demo sit text comment dolor text",
+      "content_type": "photo",
+      "media": [
+        {
+          "media_id": "7777186366170356326",
+          "type": "photo",
+          "url": "https://example.com/demo/eba1efe3261c",
+          "alt_text": null
+        }
+      ],
+      "likes": 3,
+      "comments_count": 0,
+      "shares": 3,
+      "views": 341,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 6,
+      "engagement_rank": 10
+    },
+    {
+      "post_url": "https://example.com/demo/dac6ba0dc4ee",
+      "tweet_id": "7777229067652086652",
+      "shortcode": "7777229067652086652",
+      "media_id": "7777229067652086652",
+      "post_date": "2026-08-28T11:27:55+00:00",
+      "caption": "Comment dolor content amet lorem placeholder amet lorem placeholder amet lorem placeholder demo sit content demo sample sample sample sample sit content amet post ipsum example post ipsum example post comment dolor content demo sit text",
+      "content_type": "photo",
+      "media": [
+        {
+          "media_id": "7777192747929174933",
+          "type": "photo",
+          "url": "https://example.com/demo/ea9c5c23e67c",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777781075611352935",
+          "type": "photo",
+          "url": "https://example.com/demo/5cba59a89603",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777248870928742386",
+          "type": "photo",
+          "url": "https://example.com/demo/d4cc6b0dd5ed",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777760118636987626",
+          "type": "photo",
+          "url": "https://example.com/demo/3b773eebb814",
+          "alt_text": null
+        }
+      ],
+      "likes": 3,
+      "comments_count": 0,
+      "shares": 1,
+      "views": 357,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 4,
+      "engagement_rank": 13
+    },
+    {
+      "post_url": "https://example.com/demo/8508d424bac3",
+      "tweet_id": "7777168727814262952",
+      "shortcode": "7777168727814262952",
+      "media_id": "7777168727814262952",
+      "post_date": "2026-08-26T11:46:16+00:00",
+      "caption": "Sample sit content amet lorem placeholder amet post ipsum placeholder amet post comment reply dolor text ipsum placeholder demo sit text comment reply dolor content amet post ipsum",
+      "content_type": "photo",
+      "media": [
+        {
+          "media_id": "7777715953797081286",
+          "type": "photo",
+          "url": "https://example.com/demo/7c3e155b88e8",
+          "alt_text": null
+        }
+      ],
+      "likes": 3,
+      "comments_count": 0,
+      "shares": 1,
+      "views": 235,
+      "quote_count": 0,
+      "bookmark_count": 0,
+      "is_quote": false,
+      "reply_to_tweet_id": null,
+      "author": {
+        "user_id": "102770428",
+        "name": "Demo User 977",
+        "handle": "Demo User 888",
+        "avatar": "https://example.com/demo/a5cd95f35738",
+        "verified": true,
+        "verified_type": null,
+        "followers": 36853
+      },
+      "engagement_score": 4,
+      "engagement_rank": 14
+    }
+  ],
+  "date_window": {
+    "start": "2026-08-01",
+    "end": null,
+    "requested": "Post ipsum",
+    "scanned_pages": 3,
+    "oldest_seen": "2026-05-31T09:00:00+00:00",
+    "newest_seen": "2026-09-02T15:47:21+00:00",
+    "reach_oldest": "2026-05-31T09:00:00+00:00",
+    "window_reached": true,
+    "estimated_pages_needed": null,
+    "page_budget": null,
+    "complete": true,
+    "stop_reason": "window_cleared"
+  }
+}

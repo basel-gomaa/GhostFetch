@@ -1,0 +1,96 @@
+# Compose is used here only to BUILD Actor images:
+#
+#     docker compose build hello_world
+#
+# Actors are not long-running services -- the worker starts one container per
+# run, with a per-run storage mount, so there is nothing to `compose up` yet.
+# The `build` profile keeps these out of any future `docker compose up`.
+
+services:
+  # The platform database: users, sessions, credentials, run metadata.
+  #
+  #     docker compose --profile db up -d postgres
+  #
+  # Bound to 127.0.0.1 ONLY. This holds encrypted social-media sessions; it must
+  # not be reachable from the network even on a trusted LAN.
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: actorplatform
+      POSTGRES_USER: actorplatform
+      # NO DEFAULT (security review M-03). A well-known fallback password is
+      # one forgotten override away from production. run-local.sh generates one
+      # into .env.local on first use and sources that file before calling
+      # compose; anyone running compose by hand does the same:
+      #     set -a; . ./.env.local; set +a; docker compose --profile db up -d postgres
+      # It only takes effect when the volume is first initialised -- to change
+      # it later, ALTER USER inside the database (run-local.sh does exactly that
+      # once, to replace the old default on an existing install).
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.local (run-local.sh generates one)}
+    # 5433 on the host: this machine already runs an unrelated postgres on 5432
+    # (the `social-data-postgres` container). Override with POSTGRES_PORT.
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5433}:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    # The API and every Worker depend on this, so it must come back by itself
+    # after a host restart. Without it the platform comes up healthy-looking and
+    # every authenticated request 503s.
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U actorplatform -d actorplatform"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    profiles: ["db"]
+
+  # Optional: the queue backend when ACTOR_QUEUE_URL=redis://127.0.0.1:6379/0.
+  # Not started by default -- the platform uses the file-backed queue unless
+  # that variable is set.
+  #
+  #     docker compose --profile queue up -d redis
+  redis:
+    image: redis:7-alpine
+    # LOOPBACK ONLY, like postgres above. Redis here has no password, and the
+    # queue it holds is trusted by the Worker: published on every interface it
+    # was readable and writable from the LAN and from every Actor container
+    # (through the bridge gateway), so anyone could read other users' run
+    # inputs or forge jobs. The API and Worker reach it on 127.0.0.1.
+    ports: ["127.0.0.1:6379:6379"]
+    profiles: ["queue"]
+
+  # HTTPS for a public deployment (security review H-05). Started by
+  # run-local.sh when PUBLIC_DOMAIN is set; see deploy/Caddyfile.
+  #
+  # HOST networking on purpose: Caddy then reaches the API on 127.0.0.1 (where
+  # the API is bound in public mode) and arrives FROM 127.0.0.1, which is the
+  # one address uvicorn trusts X-Forwarded-For/-Proto from by default. On a
+  # bridge network it would arrive from a docker address, the forwarded headers
+  # would be ignored, and every client would look like the proxy.
+  caddy:
+    image: caddy:2.8.4-alpine
+    network_mode: host
+    environment:
+      PUBLIC_DOMAIN: ${PUBLIC_DOMAIN:-localhost}
+      UPSTREAM_PORT: ${PORT:-8000}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    profiles: ["public"]
+
+  hello_world:
+    build:
+      context: ./actors/hello_world
+    image: actor-platform/hello_world:latest
+    profiles: ["build"]
+
+  item_processor:
+    build:
+      context: ./actors/item_processor
+    image: actor-platform/item_processor:latest
+    profiles: ["build"]
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

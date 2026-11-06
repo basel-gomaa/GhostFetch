@@ -1,0 +1,185 @@
+# Every pull request and every push to main runs lint, the type check, the
+# console build, the offline + database test suites and a dependency audit.
+# The Docker suites build Actor images and take a while, so they run on demand
+# (Actions -> ci -> Run workflow).
+#
+# Locally the same groups run with:
+#     python3 scripts/run_tests.py --group offline
+#     ACTOR_PLATFORM_DATABASE_URL=... ACTOR_PLATFORM_SECRET_KEY=... python3 scripts/run_tests.py --group db
+#     python3 scripts/run_tests.py --group docker
+
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.13"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: python -m pip install ruff
+      # Rules and exclusions live in pyproject.toml.
+      - run: ruff check .
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      # Both virtualenvs, because mypy reads each half's dependencies' types
+      # through that half's own interpreter (see scripts/type_check.py).
+      - name: Pipeline virtualenv
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.lock.txt
+      - name: Platform virtualenv
+        working-directory: actor-platform
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.lock.txt
+      # Pinned, and kept in step with MYPY_VERSION in scripts/type_check.py:
+      # a new mypy release can add errors, which should arrive as a deliberate
+      # bump rather than as a red main.
+      - run: python -m pip install mypy==2.4.1
+      - run: python scripts/type_check.py
+
+  console:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: actor-platform/ui/console
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: actor-platform/ui/console/package-lock.json
+      - run: npm ci
+      # `npm run build` runs tsc first, so this is also the type check.
+      - run: npm run build
+
+  offline-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Pipeline virtualenv
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.lock.txt
+      - name: Platform virtualenv
+        working-directory: actor-platform
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.lock.txt
+      - run: python scripts/run_tests.py --group offline
+
+  db-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      ACTOR_PLATFORM_DATABASE_URL: postgresql://ci:ci-only-password@127.0.0.1:5432/ci
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Platform virtualenv
+        working-directory: actor-platform
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.lock.txt
+      - name: A throwaway encryption key for this job only
+        run: echo "ACTOR_PLATFORM_SECRET_KEY=$(python -c 'import base64,os;print(base64.b64encode(os.urandom(32)).decode())')" >> "$GITHUB_ENV"
+      - run: python scripts/run_tests.py --group db
+
+  docker-tests:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Virtualenvs
+        run: |
+          python -m venv .venv && .venv/bin/pip install -r requirements.lock.txt
+          cd actor-platform && python -m venv .venv && .venv/bin/pip install -r requirements.lock.txt
+      - name: Vendor the collectors into every Actor
+        run: for s in actor-platform/actors/*/sync_collector.sh; do bash "$s" "$GITHUB_WORKSPACE"; done
+      # test_facebook runs this image directly (`docker run actor-platform/facebook`)
+      # and does not skip without it, so it is built here from the code under test.
+      - name: Build the Facebook Actor image
+        run: docker build -t actor-platform/facebook:latest actor-platform/actors/facebook
+      - run: python scripts/run_tests.py --group docker
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - run: python -m pip install pip-audit
+      - name: Python dependencies (pipeline and platform)
+        run: |
+          pip-audit -r requirements.lock.txt
+          pip-audit -r actor-platform/requirements.lock.txt
+      # What each image installs: its hashed lock (scripts/image_locks.py).
+      # Every version is exact, so nothing is resolved.
+      - name: Image lock files
+        run: |
+          for lock in actor-platform/actors/*/requirements.txt; do
+            echo "== $lock"
+            pip-audit --disable-pip --no-deps --progress-spinner off -r "$lock"
+          done
+      - name: Console dependencies
+        working-directory: actor-platform/ui/console
+        run: npm audit --audit-level=high --omit=dev

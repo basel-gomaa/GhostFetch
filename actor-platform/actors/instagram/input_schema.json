@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "instagram",
+  "description": "Scrapes posts, and optionally comments, from a public Instagram profile or hashtag. A date range is a window the run must COVER, not merely filter to: with start_date/end_date and no max_posts, the run collects every post in the range and reports whether it managed to cover it. Needs an authenticated session, forwarded to the Worker as IG_SESSION.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "A profile ('nasa', or an instagram.com/... URL) or a hashtag ('#space' or 'space' when mode is hashtag)."
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "profile",
+        "hashtag"
+      ],
+      "description": "What the target names. Defaults to 'profile'. A hashtag feed is RANKED, not chronological (top posts first, then recent), so a date range over one can only filter what it is served - it cannot page backwards to cover a period the way a profile can."
+    },
+    "max_posts": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on posts returned. OMIT IT when using a date range on a profile: the range is then the stopping condition, and a count here would cut the window short."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or after this moment (UTC, inclusive). A bare date means midnight."
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or before this moment (UTC, inclusive). A bare date means end of day."
+    },
+    "collect_comments": {
+      "type": "boolean",
+      "description": "Also collect each post's comments and replies. Considerably slower. Defaults to false."
+    },
+    "max_comments_per_post": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on comments per post."
+    },
+    "analyse": {
+      "type": "boolean",
+      "description": "Also produce an AI analysis and report (text, PDF and an HTML dashboard) alongside the data. Defaults to true. Costs two Claude calls; the scrape itself is unaffected either way."
+    },
+    "ai_prompt": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Your own analysis instructions, e.g. 'focus on complaints about delivery times'. Added to the built-in brief rather than replacing it, so the report keeps its structure and always renders."
+    }
+  },
+  "required": [
+    "target"
+  ],
+  "x-date-window": {
+    "start": "start_date",
+    "end": "end_date"
+  },
+  "additionalProperties": false
+}

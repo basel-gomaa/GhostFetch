@@ -1,0 +1,11 @@
+# WHAT THIS IMAGE DEPENDS ON. The image installs requirements.txt, the lock
+# made from this file (every package pinned, with hashes):
+#     python3 scripts/image_locks.py lock item_processor
+# Edit here, then re-lock; never edit requirements.txt by hand.
+#
+# item_processor's OWN dependencies. The platform installs none of these into
+# its own environment -- they exist only inside this Actor's image.
+#
+# python-slugify is pinned: an Actor's output must be reproducible across
+# rebuilds, and an unpinned dependency quietly makes it not.
+python-slugify==9.1.3

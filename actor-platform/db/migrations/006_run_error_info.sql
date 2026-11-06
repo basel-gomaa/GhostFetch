@@ -1,0 +1,34 @@
+-- WHY a run failed, structured, and whether it still produced usable data.
+--
+-- `error` already carries a human sentence and is untouched: the dashboard
+-- renders it, the CLI prints it, and every row already has one. Widening that
+-- column into a document would have broken all three to say something they were
+-- not asking for. This sits beside it instead.
+--
+-- error_info holds shared.errors.RunError.to_dict():
+--
+--     {"code": "RATE_LIMITED", "message": "...", "retryable": true,
+--      "retry_after_seconds": 60, "stage": "collect_posts", "actor": "x",
+--      "attempt": 1, "detail": "QUOTA_EXCEEDED"}
+--
+-- jsonb rather than a column per field, for two reasons. The shape is the
+-- Actor <-> platform contract's, defined in shared/errors.py, and a schema
+-- change there should not need a migration here; and the fields are sparse --
+-- retry_after_seconds is meaningful for one category out of nine.
+--
+-- NULL for every run that succeeded, every run that failed before this existed,
+-- and every run whose failure could not be classified into anything better than
+-- what `error` already said.
+ALTER TABLE runs ADD COLUMN error_info jsonb;
+
+-- Whether a FAILED run still left data worth reading.
+--
+-- A scrape that collected 640 of 1000 posts and then lost the network has
+-- failed, and discarding those 640 is a second failure the platform inflicts on
+-- top of the first. The run stays FAILED -- it did not do what was asked -- and
+-- this says the artifact is still worth fetching.
+--
+-- NOT NULL DEFAULT false: absence of evidence is "no partial data", which is
+-- the honest reading for every existing row, and it keeps the column cheap to
+-- filter on without a three-valued truth to reason about.
+ALTER TABLE runs ADD COLUMN partial boolean NOT NULL DEFAULT false;

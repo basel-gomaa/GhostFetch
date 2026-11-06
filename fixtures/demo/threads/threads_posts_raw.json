@@ -1,0 +1,250 @@
+{
+  "platform": "Threads",
+  "scraper": "Content",
+  "status": "success",
+  "page_information": {
+    "user_id": "25969740077",
+    "page_name": "Demo User 485",
+    "username": "Demo User 511",
+    "page_url": "https://example.com/demo/39d5b3f2f557",
+    "followers_count": 8507065,
+    "description": "Reply dolor",
+    "verified": true,
+    "avatar": "https://example.com/demo/5dc6fd3f931b",
+    "scrape_date": "2026-09-10T10:43:18.688650+00:00"
+  },
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/86c41aedac6b",
+      "post_id": "7777193149470133104",
+      "shortcode": "Ipsum",
+      "post_date": "2026-09-01T21:00:25+00:00",
+      "caption": "Content demo sample sit text ipsum example lorem placeholder demo sit text ipsum example post comment dolor text ipsum placeholder demo sample",
+      "content_type": "video",
+      "media": [
+        {
+          "media_id": "7777193149470133104",
+          "type": "video",
+          "url": "https://example.com/demo/2515ae7aae57",
+          "alt_text": null,
+          "video_url": "https://example.com/demo/e20b777ffb85"
+        }
+      ],
+      "likes": 16784,
+      "comments_count": 147,
+      "shares": 1435,
+      "repost_count": 2188,
+      "quote_count": 158,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 18366,
+      "engagement_rank": 2
+    },
+    {
+      "post_url": "https://example.com/demo/cc5fb9789f9e",
+      "post_id": "7777161982594553958",
+      "shortcode": "Dolor",
+      "post_date": "2026-09-01T18:00:47+00:00",
+      "caption": "Post ipsum example post comment reply reply dolor text ipsum placeholder amet lorem example post ipsum example lorem placeholder amet lorem example post comment dolor content amet lorem example post ipsum placeholder demo sample sample sit content demo sample sample",
+      "content_type": "image",
+      "media": [
+        {
+          "media_id": "7777161982594553958",
+          "type": "image",
+          "url": "https://example.com/demo/4fd71dfea34c",
+          "alt_text": null
+        }
+      ],
+      "likes": 86,
+      "comments_count": 1,
+      "shares": 1,
+      "repost_count": 5,
+      "quote_count": 1,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 88,
+      "engagement_rank": 48
+    },
+    {
+      "post_url": "https://example.com/demo/b2500f157408",
+      "post_id": "7777713852567507061",
+      "shortcode": "Amet",
+      "post_date": "2026-08-31T22:00:47+00:00",
+      "caption": "Placeholder demo sample sit content amet post ipsum example lorem example post ipsum placeholder demo sample sit text ipsum placeholder amet lorem placeholder demo sit text ipsum placeholder amet lorem example post comment dolor content amet lorem example lorem example",
+      "content_type": "video",
+      "media": [
+        {
+          "media_id": "7777713852567507061",
+          "type": "video",
+          "url": "https://example.com/demo/2bf47ccb13a9",
+          "alt_text": null,
+          "video_url": "https://example.com/demo/b64bd942dea"
+        }
+      ],
+      "likes": 57,
+      "comments_count": 0,
+      "shares": 0,
+      "repost_count": 2,
+      "quote_count": 0,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 57,
+      "engagement_rank": 50
+    },
+    {
+      "post_url": "https://example.com/demo/67f94075fbde",
+      "post_id": "7777230765406071810",
+      "shortcode": "Example",
+      "post_date": "2026-08-31T20:00:22+00:00",
+      "caption": "Comment reply dolor text comment reply dolor content demo sample sit text comment dolor content demo sit content amet lorem example lorem placeholder amet",
+      "content_type": "video",
+      "media": [
+        {
+          "media_id": "7777230765406071810",
+          "type": "video",
+          "url": "https://example.com/demo/6114498aa162",
+          "alt_text": null,
+          "video_url": "https://example.com/demo/8fc662ac74af"
+        }
+      ],
+      "likes": 1516,
+      "comments_count": 27,
+      "shares": 44,
+      "repost_count": 146,
+      "quote_count": 24,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 1587,
+      "engagement_rank": 13
+    },
+    {
+      "post_url": "https://example.com/demo/87ea410eda23",
+      "post_id": "7777241452121229530",
+      "shortcode": "Comment",
+      "post_date": "2026-08-31T19:00:19+00:00",
+      "caption": "Lorem example post comment reply reply",
+      "content_type": "image",
+      "media": [
+        {
+          "media_id": "7777241452121229530",
+          "type": "image",
+          "url": "https://example.com/demo/956210b4d78e",
+          "alt_text": null
+        }
+      ],
+      "likes": 4269,
+      "comments_count": 30,
+      "shares": 76,
+      "repost_count": 198,
+      "quote_count": 4,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 4375,
+      "engagement_rank": 6
+    },
+    {
+      "post_url": "https://example.com/demo/c07a892ef266",
+      "post_id": "7777120576057751271",
+      "shortcode": "Text",
+      "post_date": "2026-08-31T17:00:38+00:00",
+      "caption": "Demo sample sit text ipsum placeholder amet lorem placeholder demo sample sit content amet",
+      "content_type": "carousel",
+      "media": [
+        {
+          "media_id": "7777262320668963662",
+          "type": "image",
+          "url": "https://example.com/demo/3206a35684cd",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777280384775927804",
+          "type": "image",
+          "url": "https://example.com/demo/def22c51f6fd",
+          "alt_text": null
+        },
+        {
+          "media_id": "7777218899620671850",
+          "type": "image",
+          "url": "https://example.com/demo/304bff295e8b",
+          "alt_text": null
+        }
+      ],
+      "likes": 109,
+      "comments_count": 2,
+      "shares": 0,
+      "repost_count": 7,
+      "quote_count": 1,
+      "views": null,
+      "is_reply": false,
+      "thread_length": 1,
+      "author": {
+        "user_id": "25969740077",
+        "name": "Demo User 485",
+        "handle": "Demo User 511",
+        "avatar": "https://example.com/demo/8c1fe448c731",
+        "verified": true
+      },
+      "engagement_score": 111,
+      "engagement_rank": 46
+    }
+  ],
+  "date_window": {
+    "start": "2026-06-01",
+    "end": "2026-09-01",
+    "requested": "Content amet lorem",
+    "scanned_pages": 4,
+    "oldest_seen": "2026-08-20T20:00:34+00:00",
+    "newest_seen": "2026-09-10T02:00:07+00:00",
+    "reach_oldest": "2026-08-20T20:00:34+00:00",
+    "window_reached": true,
+    "estimated_pages_needed": null,
+    "page_budget": null,
+    "complete": true,
+    "stop_reason": "requested_met"
+  },
+  "coverage": {
+    "pages_scanned": 4,
+    "posts_scanned": 88,
+    "stop_reason": "requested_met"
+  }
+}

@@ -1,0 +1,39 @@
+# WHAT THIS IMAGE DEPENDS ON. The image installs requirements.txt, the lock
+# made from this file (every package pinned, with hashes):
+#     python3 scripts/image_locks.py lock instagram
+# Edit here, then re-lock; never edit requirements.txt by hand.
+#
+# instagram's OWN dependencies, installed only into this Actor's image.
+#
+# PLAYWRIGHT IS MANDATORY HERE, unlike the facebook Actor. That one's page and
+# group paths are browser-free by design, so its image carries no Chromium at
+# all. This collector's engine opens `sync_playwright()` in EVERY entry point:
+# the HTTP replay tier is Tier 1 for the data, but the tokens it replays with
+# (x-ig-app-id, x-ig-www-claim, the exact user-agent) are captured from a real
+# page load first. There is no browser-free path to them, so the image is ~1.3GB
+# rather than ~180MB. Verified by reading the engine, not assumed.
+# MUST EQUAL THE BASE IMAGE'S TAG (Dockerfile FROM playwright/python:vX).
+# The image ships the browsers for ITS version only; a different package
+# version looks for a browser build that is not there and every launch fails
+# ("Executable doesn't exist at /ms-playwright/..."). test_actor_images.py
+# checks the two agree, so a base-image bump fails CI until this follows.
+playwright==1.64.1
+
+# The HTTP replay tier. h2 comes with the [http2] extra, which it prefers.
+httpx[http2]==0.28.1
+
+# The analysis and report stage -- the vendored processors/ai/reports layer's
+# own dependencies, scanned from its imports:
+#
+#   anthropic        ai/claude.py and ai/segmentation.py
+#   reportlab        reports/instagram_report.py (the PDF)
+#   python-dotenv    config.py, which ai/claude.py imports for the API key
+#   arabic-reshaper  \ reports/instagram_report.py shapes Arabic text for the
+#   python-bidi      / PDF, and real accounts here post in Arabic
+#
+# reports/dashboard.py writes HTML with the standard library only.
+anthropic>=0.40
+reportlab>=4.0
+python-dotenv>=1.0
+arabic-reshaper>=3.0
+python-bidi>=0.4

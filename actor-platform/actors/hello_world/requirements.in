@@ -1,0 +1,9 @@
+# WHAT THIS IMAGE DEPENDS ON. The image installs requirements.txt, the lock
+# made from this file (every package pinned, with hashes):
+#     python3 scripts/image_locks.py lock hello_world
+# Edit here, then re-lock; never edit requirements.txt by hand.
+#
+# hello_world needs nothing but the standard library.
+#
+# Each Actor pins its OWN dependencies here; the platform never installs them
+# into its own environment. Real Actors will list httpx, playwright, etc.

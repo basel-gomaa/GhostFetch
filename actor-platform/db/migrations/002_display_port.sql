@@ -1,0 +1,17 @@
+-- A run whose Actor exports a viewable display records the host port it was
+-- published on, so the API can proxy it.
+--
+-- WHY THE COLUMN EXISTS AT ALL. The port is chosen by Docker, and the Worker is
+-- the only component permitted to ask Docker anything -- the API records
+-- intent and serves artifacts, and a test enforces that it never shells out to
+-- Docker. So the Worker writes the port here and the API reads it, which is the
+-- same division cancellation already uses: the registry is the channel between
+-- the two, never a direct call.
+--
+-- NULL for every run of every Actor that has no display, which is nearly all of
+-- them, and NULL for every run that already exists.
+--
+-- NOT a credential. The port is bound to host loopback and reaching it still
+-- requires an authenticated, ownership-checked route; it is stored in the clear
+-- because knowing it grants nothing.
+ALTER TABLE runs ADD COLUMN display_port int;

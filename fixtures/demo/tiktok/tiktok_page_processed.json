@@ -1,0 +1,97 @@
+{
+  "page_name": "Demo User 830",
+  "username": "Demo User 999",
+  "followers_count": 8400000,
+  "scrape_date": "2026-09-12T19:41:00.554965+00:00",
+  "statistics": {
+    "total_posts": 10,
+    "total_likes": 3769400,
+    "total_comments": 75134,
+    "total_shares": 209580,
+    "total_views": 24821100,
+    "average_likes": 376940.0,
+    "average_comments": 7513.4,
+    "average_shares": 20958.0,
+    "average_views": 2482110.0,
+    "posting_frequency": {
+      "first_post": "2026-07-27",
+      "last_post": "2026-09-10",
+      "days_covered": 45,
+      "posts_per_week": 1.56,
+      "posts_per_day": 0.22
+    }
+  },
+  "content_breakdown": {
+    "video": 5,
+    "photo": 5,
+    "unknown": 0
+  },
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/ba1c086ef5c8",
+      "caption": "Content demo sample sample sit text comment dolor content demo sit text comment dolor text ipsum example post comment dolor text ipsum example post ipsum example post ipsum example lorem example lorem example lorem placeholder amet lorem placeholder demo sit",
+      "post_date": "2026-08-10T19:08:28+00:00",
+      "likes": 1400000,
+      "shares": 49700,
+      "views": 6600000,
+      "comments_count": 18100,
+      "engagement_score": 1467800,
+      "content_type": "video"
+    },
+    {
+      "post_url": "https://example.com/demo/e4477844b926",
+      "caption": "Placeholder demo sample sit text ipsum placeholder demo sample sample sit text comment dolor text comment reply dolor text ipsum placeholder amet post ipsum example lorem placeholder amet post ipsum example lorem example lorem example post ipsum placeholder amet post",
+      "post_date": "2026-08-29T14:48:15+00:00",
+      "likes": 913600,
+      "shares": 34000,
+      "views": 4100000,
+      "comments_count": 20000,
+      "engagement_score": 967600,
+      "content_type": "photo"
+    },
+    {
+      "post_url": "https://example.com/demo/7f280a55113a",
+      "caption": "Sample sample sit content demo sample sit content demo sample sample sample sample sample sit content amet post ipsum example lorem placeholder amet lorem example lorem placeholder demo sit text comment dolor content demo sit content",
+      "post_date": "2026-07-30T20:53:09+00:00",
+      "likes": 471800,
+      "shares": 101800,
+      "views": 4200000,
+      "comments_count": 9151,
+      "engagement_score": 582751,
+      "content_type": "video"
+    },
+    {
+      "post_url": "https://example.com/demo/636437e9de8a",
+      "caption": "Example post comment dolor content amet post comment reply reply dolor text comment reply dolor text comment dolor text comment reply reply reply dolor content amet post ipsum example lorem placeholder amet lorem example lorem placeholder amet lorem example post",
+      "post_date": "2026-07-27T19:26:20+00:00",
+      "likes": 436800,
+      "shares": 10900,
+      "views": 3600000,
+      "comments_count": 7516,
+      "engagement_score": 455216,
+      "content_type": "photo"
+    },
+    {
+      "post_url": "https://example.com/demo/1afb8e1e42da",
+      "caption": "Placeholder demo sit content amet lorem placeholder demo sit text ipsum placeholder amet post comment reply dolor content demo sit text comment reply reply reply reply dolor content amet lorem placeholder demo sample sample sample sit text ipsum example post",
+      "post_date": "2026-08-31T20:59:24+00:00",
+      "likes": 105000,
+      "shares": 3516,
+      "views": 1000000,
+      "comments_count": 3112,
+      "engagement_score": 111628,
+      "content_type": "video"
+    },
+    {
+      "post_url": "https://example.com/demo/6d976d8cdd36",
+      "caption": "Example lorem example lorem placeholder demo sit text comment reply reply dolor text ipsum example post ipsum placeholder amet post comment",
+      "post_date": "2026-08-25T20:08:37+00:00",
+      "likes": 98500,
+      "shares": 1604,
+      "views": 1200000,
+      "comments_count": 7158,
+      "engagement_score": 107262,
+      "content_type": "photo"
+    }
+  ]
+}
