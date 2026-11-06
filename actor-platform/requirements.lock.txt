@@ -32,4 +32,4 @@ starlette==1.10.0
 typing-extensions==4.16.0
 typing-inspection==0.4.4
 uvicorn==0.54.0
-websockets==17.3
+websockets==17.4
