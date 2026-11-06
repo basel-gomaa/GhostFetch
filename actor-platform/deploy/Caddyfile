@@ -1,0 +1,19 @@
+# HTTPS in front of the platform (security review H-05).
+#
+#     PUBLIC_DOMAIN=platform.example.com ./run-local.sh
+#
+# run-local.sh then starts this (docker compose --profile public) and binds the
+# API to 127.0.0.1, so the ONLY way in from outside is through here, over TLS.
+# Caddy obtains and renews the certificate itself (Let's Encrypt): the domain's
+# DNS must point at this machine and ports 80 and 443 must be reachable.
+#
+# What Caddy does NOT need to do, because the app already does it: security
+# headers and HSTS (api/security_headers.py), refusing plain-HTTP sign-in
+# (ACTOR_PLATFORM_REQUIRE_HTTPS=1), and the Secure cookie flag. Caddy forwards
+# X-Forwarded-For / -Proto, which uvicorn trusts from 127.0.0.1 -- that is how
+# the app sees the real client address (for rate limits) and the https scheme.
+
+{$PUBLIC_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:{$UPSTREAM_PORT:8000}
+}

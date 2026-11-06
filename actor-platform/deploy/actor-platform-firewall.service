@@ -1,0 +1,26 @@
+# Re-applies deploy/host-firewall.sh at boot (security review N-01).
+#
+# It runs a ROOT-OWNED COPY of the script, not the one in your checkout: a unit
+# that runs a file your own user can edit as root is a way to become root.
+#
+#     sudo install -m 0755 -o root -g root deploy/host-firewall.sh /usr/local/sbin/actor-platform-firewall
+#     sudo install -m 0644 -o root -g root deploy/actor-platform-firewall.service /etc/systemd/system/
+#     sudo systemctl daemon-reload
+#     sudo systemctl enable --now actor-platform-firewall.service
+#
+# Undo: sudo systemctl disable --now actor-platform-firewall.service (its
+# ExecStop removes the rules), then delete the two installed files.
+
+[Unit]
+Description=Actor Platform: keep Actor containers off host ports
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/actor-platform-firewall apply
+ExecStop=/usr/local/sbin/actor-platform-firewall remove
+
+[Install]
+WantedBy=multi-user.target

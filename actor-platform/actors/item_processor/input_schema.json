@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "item_processor",
+  "description": "Turns a count into that many slugged records. Can fail part way through on purpose, to exercise the platform's failure handling.",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "How many items to process."
+    },
+    "fail_at": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Fail deliberately while processing this item. Null never fails."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Prefix for each item's title. Defaults to 'Sample Item'."
+    },
+    "delay_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 60000,
+      "description": "Pause before each item, so a run can be held open long enough to test crash handling."
+    }
+  },
+  "required": ["count"],
+  "additionalProperties": false
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "facebook",
+  "description": "Scrapes posts, and optionally comments, from a public Facebook page or group. A date range is a window the run must COVER, not merely filter to: with start_date/end_date and no max_posts, the run collects every post in the range and reports whether it managed to cover it. Needs an authenticated session, forwarded to the Worker as FB_SESSION.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "A page ('nasa', or a facebook.com/... URL) or a group ('groups/123456', a numeric group id, or a full group URL)."
+    },
+    "max_posts": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on posts returned. OMIT IT when using a date range: the range is then the stopping condition, and a count here would cut the window short."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or after this moment (UTC, inclusive). A bare date means midnight."
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or before this moment (UTC, inclusive). A bare date means end of day."
+    },
+    "collect_comments": {
+      "type": "boolean",
+      "description": "Also collect each post's comments and replies. Considerably slower. Defaults to true.",
+      "default": true
+    },
+    "max_comments_per_post": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on comments per post. Under a date range this counts comments written INSIDE the range."
+    },
+    "comment_sort": {
+      "type": "string",
+      "enum": [
+        "relevant",
+        "newest"
+      ],
+      "description": "Which comments a cap returns. 'relevant' is Facebook's own ranking and the default; 'newest' walks the connection in time order and is what a date range needs to cover a period rather than sample it."
+    },
+    "page_concurrency": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "description": "Split a dated PAGE scrape into that many concurrent date chunks. Ignored for groups, which have no server-side date seek and would just repeat the same walk."
+    },
+    "analyse": {
+      "type": "boolean",
+      "description": "Also produce an AI analysis and report (text, PDF and an HTML dashboard) alongside the data. Defaults to true. Costs two Claude calls; the scrape itself is unaffected either way."
+    },
+    "ai_prompt": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Your own analysis instructions, e.g. 'focus on complaints about delivery times'. Added to the built-in brief rather than replacing it, so the report keeps its structure and always renders."
+    }
+  },
+  "required": [
+    "target"
+  ],
+  "x-date-window": {
+    "start": "start_date",
+    "end": "end_date"
+  },
+  "additionalProperties": false
+}

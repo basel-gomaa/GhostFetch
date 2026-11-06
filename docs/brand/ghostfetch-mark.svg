@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 10 182 93" fill="none" stroke="#512DA8" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+  <title>GhostFetch</title>
+  <!-- Hand-traced from ghostfetch-brand-reference.jpg (stroke centres measured
+       from the reference, 7.5-unit strokes on a 14-unit line pitch). The top
+       stream line IS the ghost's outline; the third line is its smile/tail. -->
+  <path d="M34 37.5H81C92 37.5 98 58.5 113 58.5C126 58.5 131 40 138 29C145 18 152 15.5 160 15.5C172 15.5 182 26 182 42C182 62 172 80 156 88C145 94 132 97 122 97C114 97 109 94 106 91"/>
+  <path d="M12 51.5H76C86 51.5 92 70 104 71.5C114 72.5 120 71 127 68"/>
+  <path d="M24 65.5H68C80 65.5 88 88 104 90C116 91 128 84 136 79"/>
+  <path d="M37 79H74"/>
+  <g fill="#512DA8" stroke="none">
+    <ellipse cx="152.5" cy="40" rx="4.4" ry="5.6" transform="rotate(-10 152.5 40)"/>
+    <ellipse cx="167" cy="46" rx="3.8" ry="4.8" transform="rotate(-10 167 46)"/>
+  </g>
+</svg>

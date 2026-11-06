@@ -1,0 +1,54 @@
+# Project metadata and tool configuration.
+#
+# This repository is NOT installed as a package: the pipeline runs as
+# `python3 main.py` and the platform from actor-platform/run-local.sh. The
+# [project] table is here so tools and readers know what this is; dependencies
+# stay in requirements.txt / requirements.lock.txt (and actor-platform's own).
+
+[project]
+name = "social-ai-pipeline-demo"
+version = "0.1.0"
+description = "Social media collectors, an AI analysis/report pipeline, and a self-hosted Actor platform that runs them."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [{ name = "Basel Gomaa" }]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+extend-exclude = [
+    ".venv",
+    "actor-platform/.venv",
+    # Vendored copies are byte-for-byte copies of collectors/, processors/,
+    # ai/, reports/ and config.py; lint the originals, never the copies.
+    "actor-platform/actors/*/vendor",
+    "actor-platform/ui",
+    ".claude",
+    "storage",
+]
+
+[tool.ruff.lint]
+# GRADUAL on purpose: errors only. These rules catch code that cannot run --
+# syntax errors, undefined names, comparisons that are always true -- and the
+# tree passes them today, so CI can enforce them from the first commit. Style
+# rules can be added one at a time later, each with its own clean-up commit.
+select = ["E9", "F63", "F7", "F82"]
+
+[tool.mypy]
+# Run through scripts/type_check.py, which checks the pipeline and the
+# platform separately, each against its own virtualenv. DEFAULT strictness on
+# purpose, like ruff's errors-only set above: the tree passes it, CI enforces
+# it, and stricter flags can be added one at a time later.
+python_version = "3.13"
+# The platform's modules import each other as top-level packages, and neither
+# half is an installed package, so module names come from directories.
+explicit_package_bases = true
+# A dependency that ships no types is treated as Any instead of failing the run.
+ignore_missing_imports = true
+exclude = [
+    '(^|/)\.venv/',
+    '(^|/)vendor/',
+    '(^|/)node_modules/',
+    '(^|/)\.claude/',
+]

@@ -1,0 +1,30 @@
+# WHAT THIS IMAGE DEPENDS ON. The image installs requirements.txt, the lock
+# made from this file (every package pinned, with hashes):
+#     python3 scripts/image_locks.py lock threads
+# Edit here, then re-lock; never edit requirements.txt by hand.
+#
+# threads' OWN dependencies, installed only into this Actor's image.
+#
+# ONE package, and that is not an accident: this collector is the cheapest of
+# the six. It needs no session and no browser -- both of its tiers are plain
+# HTTP, and the package's single Playwright reference is a rescue path for a
+# rotated query id which logs a warning and carries on when it is missing.
+#
+# h2 comes with the [http2] extra, which the replay engine prefers.
+httpx[http2]==0.28.1
+
+# The analysis and report stage. Still no browser -- these are the vendored
+# processors/ai/reports layer's own dependencies, scanned from its imports:
+#
+#   anthropic        ai/claude.py and ai/segmentation.py
+#   reportlab        reports/threads_report.py (the PDF)
+#   python-dotenv    config.py, which ai/claude.py imports for the API key
+#   arabic-reshaper  \ reports/threads_report.py shapes Arabic text for the
+#   python-bidi      / PDF, and real pages here post in Arabic
+#
+# reports/dashboard.py writes HTML with the standard library only.
+anthropic>=0.40
+reportlab>=4.0
+python-dotenv>=1.0
+arabic-reshaper>=3.0
+python-bidi>=0.4

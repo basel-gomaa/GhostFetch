@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "facebook_groups",
+  "description": "Collect posts and public comments from a PUBLIC Facebook group. No Facebook account, session or cookies are used or required - this reads only what a logged-out visitor can see. A Page or profile URL is refused; use the facebook Actor for those.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "The public group: a URL (https://www.facebook.com/groups/<id>) or a bare group id. A Page or profile URL is rejected rather than scraped."
+    },
+    "max_posts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000,
+      "default": 1000,
+      "description": "Ceiling on posts collected; 0 means NO CAP - take every post the public feed reaches. Matching posts are taken NEWEST first, so a date range narrower than this returns everything in it. Defaults to 1000 (~235 feed requests); an uncapped run is bounded only by what Facebook serves."
+    },
+    "max_comments_per_post": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000,
+      "default": 20,
+      "description": "Ceiling on public comments per post; 0 means NO CAP - take every comment Facebook serves. To skip comments entirely (much faster) set collect_comments to false. A post exposing fewer returns fewer - nothing is chased to reach this number, and the comment count Facebook reports is kept separate from what it actually served. Facebook's own public ceiling stops this well before a large number does (measured: 23 of 27 on one post)."
+    },
+    "include_replies": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also keep replies to comments. Off by default."
+    },
+    "collect_comments": {
+      "type": "boolean",
+      "default": true,
+      "description": "Collect comments at all. The comment stage is the expensive half of a run; turn it off for a posts-only scrape."
+    },
+    "public_only": {
+      "type": "boolean",
+      "const": true,
+      "default": true,
+      "description": "Always true. This Actor has no account and collects only public content; it is refused if set false rather than silently ignored."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts on or after this date (UTC, inclusive). The date range is applied BEFORE max_posts. Note the group feed has no server-side date search, so an old window costs real paging time and may end incomplete - the result says which."
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts on or before this date (UTC, inclusive)."
+    },
+    "analyse": {
+      "type": "boolean",
+      "default": true,
+      "description": "Run the Claude analysis and write the report, PDF and dashboard artifacts."
+    },
+    "ai_prompt": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Extra instructions for the analysis, e.g. what to focus on."
+    }
+  },
+  "required": ["target"],
+  "x-date-window": {
+    "start": "start_date",
+    "end": "end_date"
+  },
+  "additionalProperties": false
+}

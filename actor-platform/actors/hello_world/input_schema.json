@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "hello_world",
+  "description": "Greets someone by name. The platform's reference Actor.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Who to greet."
+    }
+  },
+  "required": ["name"],
+  "additionalProperties": false
+}

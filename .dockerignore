@@ -1,0 +1,28 @@
+# Keep the image small and keep SECRETS out of it.
+.venv/
+__pycache__/
+*.pyc
+*.log
+.git/
+.gitignore
+
+# Never bake live session credentials into the image.
+auth/
+*_auth.json
+data/**/*_auth.json
+data/**/*_profile_*/
+data/facebook/fb_profile_*/
+
+# Local run storage + the groups service's per-run auth staging / per-worker
+# temp dirs (may hold cookies).
+storage/
+.fb_groups_work/
+
+# Env / editor / OS noise.
+.env
+.vscode/
+.DS_Store
+
+# Large demo artifacts not needed at runtime.
+reports/output/
+experiments/

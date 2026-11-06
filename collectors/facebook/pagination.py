@@ -1,0 +1,6 @@
+"""Comment sort orders (the demo build keeps only the constants)."""
+
+COMMENT_SORT_RELEVANT = "relevant"
+COMMENT_SORT_NEWEST = "newest"
+COMMENT_SORT_CHOICES = (COMMENT_SORT_RELEVANT, COMMENT_SORT_NEWEST)
+DEFAULT_COMMENT_SORT = COMMENT_SORT_RELEVANT

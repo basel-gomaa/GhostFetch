@@ -1,0 +1,99 @@
+{
+  "page_name": "Demo User 226",
+  "username": "Demo User 124",
+  "followers_count": 157527,
+  "scrape_date": "2026-09-02T16:45:04.414493+00:00",
+  "statistics": {
+    "total_posts": 18,
+    "total_likes": 17094,
+    "total_comments": 157,
+    "total_reposts": 125,
+    "total_views": 412845,
+    "average_likes": 949.67,
+    "average_comments": 8.72,
+    "average_reposts": 6.94,
+    "average_views": 22935.83,
+    "posting_frequency": {
+      "first_post": "2026-08-01",
+      "last_post": "2026-08-30",
+      "days_covered": 29,
+      "posts_per_week": 4.34,
+      "posts_per_day": 0.62
+    }
+  },
+  "content_breakdown": {
+    "image": 12,
+    "video": 0,
+    "reel": 4,
+    "carousel": 2,
+    "unknown": 0
+  },
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/bd15880e2ba5",
+      "caption": "Demo sample sit text ipsum example lorem example lorem example post comment dolor text ipsum placeholder amet lorem placeholder demo sit content demo sample sample sit text comment reply reply reply reply reply dolor content demo sample sample sample sample",
+      "post_date": "2026-08-01T15:00:03+00:00",
+      "likes": 6670,
+      "reposts": 10,
+      "views": 0,
+      "comments_count": 12,
+      "engagement_score": 6692,
+      "content_type": "image"
+    },
+    {
+      "post_url": "https://example.com/demo/f3791a4f820c",
+      "caption": "Reply dolor content amet lorem placeholder demo sit content demo sit content amet post ipsum example lorem placeholder demo sit content demo sample",
+      "post_date": "2026-08-20T13:00:04+00:00",
+      "likes": 2043,
+      "reposts": 3,
+      "views": 0,
+      "comments_count": 5,
+      "engagement_score": 2051,
+      "content_type": "image"
+    },
+    {
+      "post_url": "https://example.com/demo/64d2028c45aa",
+      "caption": "Post comment reply reply dolor content demo sample sit text ipsum placeholder amet lorem example post comment dolor content amet lorem placeholder amet lorem example post ipsum example lorem example post comment dolor content amet post comment dolor content amet",
+      "post_date": "2026-08-02T09:36:27+00:00",
+      "likes": 1911,
+      "reposts": 6,
+      "views": 0,
+      "comments_count": 6,
+      "engagement_score": 1923,
+      "content_type": "image"
+    },
+    {
+      "post_url": "https://example.com/demo/bdf1fbac38cd",
+      "caption": "Reply reply dolor content demo sample sample sit content amet post comment dolor content demo sample sit content amet lorem placeholder amet post ipsum example lorem placeholder amet lorem example post ipsum placeholder",
+      "post_date": "2026-08-18T10:37:14+00:00",
+      "likes": 1611,
+      "reposts": 0,
+      "views": 0,
+      "comments_count": 51,
+      "engagement_score": 1662,
+      "content_type": "image"
+    },
+    {
+      "post_url": "https://example.com/demo/59e5f81402a9",
+      "caption": "Comment dolor text ipsum placeholder demo sample sit content demo sample sample sample sit text ipsum placeholder demo sample sit content amet lorem example post ipsum placeholder demo sit content amet post comment dolor content demo sample sample sample sit",
+      "post_date": "2026-08-01T10:00:04+00:00",
+      "likes": 1292,
+      "reposts": 3,
+      "views": 0,
+      "comments_count": 1,
+      "engagement_score": 1296,
+      "content_type": "image"
+    },
+    {
+      "post_url": "https://example.com/demo/288e54e92787",
+      "caption": "Amet lorem placeholder amet post ipsum example lorem placeholder demo sample sit text ipsum placeholder demo sit content demo sample sample sit text ipsum placeholder amet post ipsum example lorem example lorem placeholder amet lorem example post comment",
+      "post_date": "2026-08-12T08:00:01+00:00",
+      "likes": 762,
+      "reposts": 65,
+      "views": 257320,
+      "comments_count": 47,
+      "engagement_score": 874,
+      "content_type": "reel"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 -24 160 160" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    .m { stroke: #512DA8; } .e { fill: #512DA8; }
+    @media (prefers-color-scheme: dark) { .m { stroke: #B39DDB; } .e { fill: #B39DDB; } }
+  </style>
+  <g class="m" stroke-width="11">
+    <path d="M52 37.5H81C92 37.5 98 58.5 113 58.5C126 58.5 131 40 138 29C145 18 152 15.5 160 15.5C172 15.5 182 26 182 42C182 62 172 80 156 88C145 94 132 97 122 97C114 97 109 94 106 91"/>
+    <path d="M40 58H76C86 58 94 80 106 84C116 86 126 82 134 78"/>
+  </g>
+  <ellipse class="e" cx="152" cy="42" rx="6" ry="7.5"/>
+  <ellipse class="e" cx="168" cy="48" rx="5" ry="6.5"/>
+</svg>

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "threads",
+  "description": "Scrapes posts, and optionally replies, from a public Threads profile or tag. NEEDS NO ACCOUNT AND NO SIGN-IN: Threads serves this data to anyone, so there is nothing to connect and nothing to expire. A date range is a window the run must COVER, not merely filter to: with start_date/end_date and no max_posts, the run collects every post in the range and reports whether it managed to cover it.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "A profile ('lumen', '@lumen' or a threads.com/... URL) or, in tag mode, a tag ('#space' or 'space')."
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "profile",
+        "tag"
+      ],
+      "description": "What the target names. Defaults to 'profile'. A TAG feed is served in ONE SHOT - it cannot be paged anonymously - so max_posts and a date range can only narrow what that single response happened to carry. A profile feed pages properly and is strictly reverse-chronological, so a date range genuinely covers a period there."
+    },
+    "max_posts": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on posts returned. Threads caps a page at 25 server-side, so larger numbers mean more requests rather than bigger ones. OMIT IT when using a date range on a profile: the range is then the stopping condition."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or after this moment (UTC, inclusive). A bare date means midnight."
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2})?)?$",
+      "format": "date-or-datetime",
+      "description": "Only posts at or before this moment (UTC, inclusive). A bare date means end of day."
+    },
+    "collect_comments": {
+      "type": "boolean",
+      "description": "Also collect each post's replies. THE PUBLIC CEILING IS REAL: logged out, Threads serves only about 5-10% of a post's replies (measured 21 of 365, 27 of 973, 26 of 477) with no way to page further, so asking for more than ~30 returns the same ~26 and costs nothing extra. Each post records how many it was actually served, so a short count is never mistaken for a failure."
+    },
+    "max_comments_per_post": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on replies per post. With a connected Threads account every reply is reachable up to this cap; without one Threads serves only ~10-26 per post (measured ~10 in late September 2026) and higher values change nothing - see collect_comments."
+    },
+    "analyse": {
+      "type": "boolean",
+      "description": "Also produce an AI analysis and report (text, PDF and an HTML dashboard) alongside the data. Defaults to true. Costs two Claude calls; the scrape itself is unaffected either way."
+    },
+    "ai_prompt": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Your own analysis instructions, e.g. 'focus on complaints about delivery times'. Added to the built-in brief rather than replacing it, so the report keeps its structure and always renders."
+    }
+  },
+  "required": [
+    "target"
+  ],
+  "x-date-window": {
+    "start": "start_date",
+    "end": "end_date"
+  },
+  "additionalProperties": false
+}

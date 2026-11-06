@@ -1,0 +1,27 @@
+{
+  "platform": "Facebook",
+  "scraper": "Content",
+  "status": "login_wall",
+  "page_information": {
+    "page_name": null,
+    "page_url": "https://example.com/demo/103bef0af6df",
+    "page_type": "page",
+    "followers_count": null,
+    "scrape_date": "2026-09-02T17:32:53.736426+00:00"
+  },
+  "posts": [],
+  "date_window": {
+    "start": "2026-08-01",
+    "end": null,
+    "requested": "Post ipsum",
+    "scanned_pages": 0,
+    "oldest_seen": null,
+    "newest_seen": null,
+    "reach_oldest": null,
+    "window_reached": true,
+    "estimated_pages_needed": null,
+    "page_budget": null,
+    "complete": false,
+    "stop_reason": "fetch_failed"
+  }
+}

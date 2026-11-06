@@ -1,0 +1,649 @@
+{
+  "platform": "Facebook",
+  "scraper": "Example",
+  "scrape_date": "2026-09-02T17:11:31.016242+00:00",
+  "posts": [
+    {
+      "post_url": "https://example.com/demo/6a655b0dd31e",
+      "resolved_url": "https://example.com/demo/6a655b0dd31e",
+      "post_id": "7238437108135334",
+      "post_date": "2026-08-01T10:00:05+00:00",
+      "caption": "Placeholder demo sample sample sit content demo sample sample sit text comment reply reply dolor content amet post ipsum example post comment reply dolor content demo sample sit text ipsum example post ipsum placeholder amet lorem example post ipsum placeholder",
+      "content_type": "image",
+      "likes": 4981,
+      "comments_count": 152,
+      "shares": 108,
+      "views": null,
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://example.com/demo/3286e299fd28",
+          "thumbnail": "https://example.com/demo/3286e299fd28",
+          "id": "7121618888142626"
+        }
+      ],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 100,
+      "replies_scraped": 12,
+      "comments": [
+        {
+          "username": "Demo User 282",
+          "profile_url": "https://example.com/demo/e7e7932bfaa",
+          "comment": "Placeholder amet lorem placeholder demo sample",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-16T16:29:10+00:00",
+          "comment_id": "7251410391131379",
+          "comment_url": "https://example.com/demo/914c68f1cdda",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 919",
+          "profile_url": "https://example.com/demo/ab62b45c25fe",
+          "comment": "Content demo sample sample sample sample sample sit text ipsum placeholder amet lorem example post ipsum placeholder demo sample sit content demo sample sample sit content",
+          "likes": 2,
+          "replies": 1,
+          "comment_date": "2026-08-13T21:50:19+00:00",
+          "comment_id": "758171268095608",
+          "comment_url": "https://example.com/demo/f1e6fe0ab9d6",
+          "reply_comments": [
+            {
+              "username": "Demo User 869",
+              "profile_url": "https://example.com/demo/eaed0d9cc736",
+              "comment": "Content amet lorem placeholder amet lorem",
+              "likes": 0,
+              "replies": 0,
+              "comment_date": "2026-08-15T02:42:25+00:00",
+              "comment_id": "7717182990844856",
+              "comment_url": "https://example.com/demo/d18d1f9941b5"
+            }
+          ]
+        },
+        {
+          "username": "Demo User 414",
+          "profile_url": "https://example.com/demo/a006c5bd8057",
+          "comment": "Ipsum placeholder amet post comment dolor content demo",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-14T05:47:00+00:00",
+          "comment_id": "233402806767448",
+          "comment_url": "https://example.com/demo/11014d82be2",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 801",
+          "profile_url": "https://example.com/demo/a27dff7e3971",
+          "comment": "Reply reply reply reply reply dolor content",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-14T18:36:04+00:00",
+          "comment_id": "7784688103498978",
+          "comment_url": "https://example.com/demo/19f3c0f00b3d",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 225",
+          "profile_url": "https://example.com/demo/29c4a98a4f13",
+          "comment": "Post ipsum example post comment reply dolor content demo sit text comment dolor content amet post comment dolor text comment reply",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-16T17:40:30+00:00",
+          "comment_id": "7720059974500436",
+          "comment_url": "https://example.com/demo/57efe4737381",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 519",
+          "profile_url": "https://example.com/demo/93a0c2af0cfd",
+          "comment": "Amet lorem placeholder",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-15T10:13:56+00:00",
+          "comment_id": "7756415046231943",
+          "comment_url": "https://example.com/demo/39a1c5f1e979",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 152,
+      "replay_stop_cause": "target_met",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 100,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "requested_met"
+    },
+    {
+      "post_url": "https://example.com/demo/71ced58bd6d8",
+      "resolved_url": "https://example.com/demo/71ced58bd6d8",
+      "post_id": "7185927758936974",
+      "post_date": "2026-08-18T10:39:31+00:00",
+      "caption": "Sample sample sit text comment reply reply dolor content amet lorem placeholder amet post ipsum placeholder demo sit text ipsum example lorem example lorem placeholder amet post comment dolor text comment dolor",
+      "content_type": "image",
+      "likes": 4271,
+      "comments_count": 80,
+      "shares": 205,
+      "views": null,
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://example.com/demo/3e8610f04f8b",
+          "thumbnail": "https://example.com/demo/3e8610f04f8b",
+          "id": "7793274266995209"
+        }
+      ],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 52,
+      "replies_scraped": 0,
+      "comments": [
+        {
+          "username": "Demo User 877",
+          "profile_url": "https://example.com/demo/8a4bb8cffe64",
+          "comment": "Amet post comment reply dolor content amet post comment dolor",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-24T00:27:12+00:00",
+          "comment_id": "7148979429990931",
+          "comment_url": "https://example.com/demo/70b3ce503a33",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 905",
+          "profile_url": "https://example.com/demo/836f015e229c",
+          "comment": "Placeholder demo sit",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-24T20:05:15+00:00",
+          "comment_id": "7777800141833710",
+          "comment_url": "https://example.com/demo/dcd8f8724346",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 249",
+          "profile_url": "https://example.com/demo/b364ca334687",
+          "comment": "Placeholder amet lorem example post ipsum",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-24T12:09:29+00:00",
+          "comment_id": "7192276345296186",
+          "comment_url": "https://example.com/demo/c9785bb4f6d1",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 905",
+          "profile_url": "https://example.com/demo/836f015e229c",
+          "comment": "Dolor text ipsum",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-24T13:17:03+00:00",
+          "comment_id": "7102137047863086",
+          "comment_url": "https://example.com/demo/610923f3c18b",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 745",
+          "profile_url": "https://example.com/demo/5f6b314f8344",
+          "comment": "Dolor text comment",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-22T16:28:45+00:00",
+          "comment_id": "7216126318418615",
+          "comment_url": "https://example.com/demo/96c67da721d6",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 891",
+          "profile_url": "https://example.com/demo/9bfdd26c41a2",
+          "comment": "Reply reply reply dolor text ipsum placeholder demo sit text comment",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-25T05:21:04+00:00",
+          "comment_id": "167876760573402",
+          "comment_url": "https://example.com/demo/b5e132289a65",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 80,
+      "replay_stop_cause": "has_next_page_false",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 52,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "window_exhausted"
+    },
+    {
+      "post_url": "https://example.com/demo/e39211b13b81",
+      "resolved_url": "https://example.com/demo/e39211b13b81",
+      "post_id": "7717848437993853",
+      "post_date": "2026-08-02T09:31:03+00:00",
+      "caption": "Sit text comment reply dolor content demo sit text ipsum example post comment reply dolor content demo sample sit text ipsum placeholder amet lorem example post comment reply dolor content amet lorem placeholder demo sample sample sample sample sample sample",
+      "content_type": "image",
+      "likes": 4092,
+      "comments_count": 59,
+      "shares": 129,
+      "views": null,
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://example.com/demo/eb8dd7a7f073",
+          "thumbnail": "https://example.com/demo/eb8dd7a7f073",
+          "id": "7119333605366849"
+        }
+      ],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 34,
+      "replies_scraped": 10,
+      "comments": [
+        {
+          "username": "Demo User 681",
+          "profile_url": "https://example.com/demo/67e9f3b936c0",
+          "comment": "Example post ipsum placeholder demo sample sample sit content amet lorem example post ipsum placeholder demo sample sit text ipsum example lorem example post comment reply reply reply reply reply reply dolor text comment reply dolor text ipsum placeholder demo",
+          "likes": 1,
+          "replies": 1,
+          "comment_date": "2026-08-15T01:49:34+00:00",
+          "comment_id": "7111556105282894",
+          "comment_url": "https://example.com/demo/37c523b0c897",
+          "reply_comments": [
+            {
+              "username": "Demo User 704",
+              "profile_url": "https://example.com/demo/5d4a51228f3e",
+              "comment": "Post comment reply reply reply dolor content demo sit content amet",
+              "likes": 0,
+              "replies": 0,
+              "comment_date": "2026-08-15T15:10:16+00:00",
+              "comment_id": "7736993056317172",
+              "comment_url": "https://example.com/demo/f99b01849e09"
+            }
+          ]
+        },
+        {
+          "username": "Demo User 350",
+          "profile_url": "https://example.com/demo/7868f53260d5",
+          "comment": "Text comment dolor content demo sample sample sit content amet lorem",
+          "likes": 3,
+          "replies": 0,
+          "comment_date": "2026-08-08T17:21:37+00:00",
+          "comment_id": "7244095242035841",
+          "comment_url": "https://example.com/demo/3133276c4970",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 823",
+          "profile_url": "https://example.com/demo/3df0fd1774d5",
+          "comment": "Text ipsum example lorem placeholder demo sit text comment reply reply dolor text comment",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-08T18:06:28+00:00",
+          "comment_id": "7148856827942663",
+          "comment_url": "https://example.com/demo/5dc71ca2789a",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 549",
+          "profile_url": "https://example.com/demo/35482da7e371",
+          "comment": "Demo sit content amet lorem placeholder demo sample sit text",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-07T10:50:11+00:00",
+          "comment_id": "7101857964503094",
+          "comment_url": "https://example.com/demo/ca75c1a5fabe",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 845",
+          "profile_url": "https://example.com/demo/c7b628e53d13",
+          "comment": "Sit content demo sample sample sample sample sample sit text comment",
+          "likes": 2,
+          "replies": 0,
+          "comment_date": "2026-08-07T03:44:14+00:00",
+          "comment_id": "7167556208141292",
+          "comment_url": "https://example.com/demo/cc8ae5f45ab1",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 462",
+          "profile_url": "https://example.com/demo/9747f203178d",
+          "comment": "Lorem placeholder demo sit content amet post comment",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-09T00:47:41+00:00",
+          "comment_id": "7238573480161684",
+          "comment_url": "https://example.com/demo/787660d84815",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 59,
+      "replay_stop_cause": "has_next_page_false",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 34,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "window_exhausted"
+    },
+    {
+      "post_url": "https://example.com/demo/17035f0571e7",
+      "resolved_url": "https://example.com/demo/17035f0571e7",
+      "post_id": "7124167358026115",
+      "post_date": "2026-08-20T13:09:01+00:00",
+      "caption": "Content amet lorem example lorem placeholder amet post ipsum example lorem placeholder demo sit text comment reply dolor text ipsum placeholder demo",
+      "content_type": "image",
+      "likes": 3872,
+      "comments_count": 46,
+      "shares": 108,
+      "views": null,
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://example.com/demo/596a42af392c",
+          "thumbnail": "https://example.com/demo/596a42af392c",
+          "id": "7162992858281576"
+        }
+      ],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 38,
+      "replies_scraped": 0,
+      "comments": [
+        {
+          "username": "Demo User 433",
+          "profile_url": "https://example.com/demo/c495c77372fe",
+          "comment": "Ipsum placeholder amet post comment reply dolor text",
+          "likes": 7,
+          "replies": 0,
+          "comment_date": "2026-08-20T21:23:17+00:00",
+          "comment_id": "7264905546521089",
+          "comment_url": "https://example.com/demo/75d90ad782f",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 904",
+          "profile_url": "https://example.com/demo/7df1e70e3422",
+          "comment": "Sit text comment reply reply reply",
+          "likes": 5,
+          "replies": 0,
+          "comment_date": "2026-08-20T23:18:35+00:00",
+          "comment_id": "7235399188455824",
+          "comment_url": "https://example.com/demo/738d63b677a7",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 25",
+          "profile_url": "https://example.com/demo/4d41eefd8090",
+          "comment": "Comment reply dolor content demo sit",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-26T13:28:02+00:00",
+          "comment_id": "7169697385066646",
+          "comment_url": "https://example.com/demo/79dc8c540bbe",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 540",
+          "profile_url": "https://example.com/demo/6eddf449ec0e",
+          "comment": "Placeholder demo sample sample sit",
+          "likes": 2,
+          "replies": 0,
+          "comment_date": "2026-08-24T07:45:22+00:00",
+          "comment_id": "7111226384689579",
+          "comment_url": "https://example.com/demo/face52247a31",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 436",
+          "profile_url": "https://example.com/demo/c232feee5f93",
+          "comment": "Amet post ipsum placeholder amet post",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-26T18:32:58+00:00",
+          "comment_id": "184542416479200",
+          "comment_url": "https://example.com/demo/340b7e34dbc4",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 181",
+          "profile_url": "https://example.com/demo/7df5d72f8ca3",
+          "comment": "Sample sit text comment",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-26T17:18:48+00:00",
+          "comment_id": "7193082331042090",
+          "comment_url": "https://example.com/demo/5f8a439515cb",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 46,
+      "replay_stop_cause": "has_next_page_false",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 38,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "window_exhausted"
+    },
+    {
+      "post_url": "https://example.com/demo/b3aa996e49ae",
+      "resolved_url": "https://example.com/demo/b3aa996e49ae",
+      "post_id": "7166844606212406",
+      "post_date": "2026-08-21T11:00:22+00:00",
+      "caption": "Lorem example post ipsum placeholder amet lorem example post ipsum placeholder demo sit content amet lorem placeholder demo sample sit text ipsum example",
+      "content_type": "text",
+      "likes": 3499,
+      "comments_count": 74,
+      "shares": 151,
+      "views": null,
+      "media": [],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 54,
+      "replies_scraped": 2,
+      "comments": [
+        {
+          "username": "Demo User 121",
+          "profile_url": "https://example.com/demo/af567e1e387f",
+          "comment": "Example post comment dolor text comment reply dolor content demo sit text comment dolor content amet post ipsum placeholder demo sit text comment reply dolor text ipsum example post ipsum placeholder demo sit",
+          "likes": 2,
+          "replies": 1,
+          "comment_date": "2026-08-23T11:46:52+00:00",
+          "comment_id": "7270698888032528",
+          "comment_url": "https://example.com/demo/1aeedc0f7a2a",
+          "reply_comments": [
+            {
+              "username": "Demo User 704",
+              "profile_url": "https://example.com/demo/5d4a51228f3e",
+              "comment": "Comment dolor content amet post ipsum example post comment dolor",
+              "likes": 1,
+              "replies": 0,
+              "comment_date": "2026-08-23T12:31:51+00:00",
+              "comment_id": "77789444812808050",
+              "comment_url": "https://example.com/demo/bc480ceaec8c"
+            },
+            {
+              "username": "Demo User 137",
+              "profile_url": "https://example.com/demo/487c7769df3d",
+              "comment": "Demo sample",
+              "likes": 0,
+              "replies": 0,
+              "comment_date": "2026-08-27T06:16:05+00:00",
+              "comment_id": "7225365120732582",
+              "comment_url": "https://example.com/demo/9e865b6d09cf"
+            }
+          ]
+        },
+        {
+          "username": "Demo User 57",
+          "profile_url": "https://example.com/demo/8cbd34610985",
+          "comment": "Sample sit text ipsum example lorem placeholder demo sample sample",
+          "likes": 2,
+          "replies": 0,
+          "comment_date": "2026-08-31T13:31:00+00:00",
+          "comment_id": "7204413907039973",
+          "comment_url": "https://example.com/demo/20dbdfb90062",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 823",
+          "profile_url": "https://example.com/demo/3df0fd1774d5",
+          "comment": "Text ipsum example lorem placeholder demo sit text comment reply reply dolor text comment",
+          "likes": 2,
+          "replies": 0,
+          "comment_date": "2026-08-27T23:07:51+00:00",
+          "comment_id": "77247851062399644",
+          "comment_url": "https://example.com/demo/b5fe7df9a59d",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 433",
+          "profile_url": "https://example.com/demo/c495c77372fe",
+          "comment": "Ipsum placeholder amet post comment reply dolor text",
+          "likes": 2,
+          "replies": 0,
+          "comment_date": "2026-08-23T09:33:20+00:00",
+          "comment_id": "7101468152451623",
+          "comment_url": "https://example.com/demo/667bb46ea2ad",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 490",
+          "profile_url": "https://example.com/demo/339a67e21309",
+          "comment": "Post comment dolor content amet post ipsum placeholder demo sit text comment reply reply reply reply reply reply reply dolor text comment reply reply dolor content demo sit content amet post ipsum example post comment dolor content amet lorem placeholder",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-09-01T03:07:26+00:00",
+          "comment_id": "7134772818804895",
+          "comment_url": "https://example.com/demo/9687b31f52a5",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 31",
+          "profile_url": "https://example.com/demo/a98888854866",
+          "comment": "Sample sample sit text",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-25T17:15:15+00:00",
+          "comment_id": "7151673641546368",
+          "comment_url": "https://example.com/demo/23f18a0c45fd",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 74,
+      "replay_stop_cause": "has_next_page_false",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 54,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "window_exhausted"
+    },
+    {
+      "post_url": "https://example.com/demo/932f9ea63101",
+      "resolved_url": "https://example.com/demo/932f9ea63101",
+      "post_id": "7100581923052136",
+      "post_date": "2026-08-01T15:00:02+00:00",
+      "caption": "Post comment reply dolor content demo sit content demo sit text comment dolor content amet lorem placeholder demo sample sample sample sample sit text comment dolor content demo sample sit content amet post comment reply dolor text ipsum placeholder demo",
+      "content_type": "image",
+      "likes": 2908,
+      "comments_count": 37,
+      "shares": 214,
+      "views": null,
+      "media": [
+        {
+          "type": "photo",
+          "url": "https://example.com/demo/935ec66fdc9",
+          "thumbnail": "https://example.com/demo/935ec66fdc9",
+          "id": "7205733119516798"
+        }
+      ],
+      "login_wall": false,
+      "status": "success",
+      "comments_scraped": 25,
+      "replies_scraped": 2,
+      "comments": [
+        {
+          "username": "Demo User 465",
+          "profile_url": "https://example.com/demo/a21b8d0356de",
+          "comment": "Placeholder amet lorem example lorem",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-03T14:53:37+00:00",
+          "comment_id": "7157904421310478",
+          "comment_url": "https://example.com/demo/dcd92cb122a6",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 967",
+          "profile_url": "https://example.com/demo/bac0cf6ca177",
+          "comment": "Post ipsum placeholder amet lorem",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-02T04:38:14+00:00",
+          "comment_id": "7119825976979848",
+          "comment_url": "https://example.com/demo/65f34c87e351",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 755",
+          "profile_url": "https://example.com/demo/fda2e5de20a1",
+          "comment": "Text comment dolor",
+          "likes": 3,
+          "replies": 0,
+          "comment_date": "2026-08-01T20:57:05+00:00",
+          "comment_id": "7166980781715766",
+          "comment_url": "https://example.com/demo/fe61ad394bdf",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 885",
+          "profile_url": "https://example.com/demo/d4246c130acd",
+          "comment": "Amet post comment dolor text ipsum example post comment reply dolor text",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-06T18:07:47+00:00",
+          "comment_id": "7768325438819965",
+          "comment_url": "https://example.com/demo/43c079985b9c",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 408",
+          "profile_url": "https://example.com/demo/eae854eda635",
+          "comment": "Dolor content amet lorem",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-07T08:48:48+00:00",
+          "comment_id": "7102953575275566",
+          "comment_url": "https://example.com/demo/c011b616aa46",
+          "reply_comments": []
+        },
+        {
+          "username": "Demo User 320",
+          "profile_url": "https://example.com/demo/f2bd7b8f9a46",
+          "comment": "Placeholder amet lorem placeholder amet post ipsum",
+          "likes": 1,
+          "replies": 0,
+          "comment_date": "2026-08-06T18:50:13+00:00",
+          "comment_id": "7166491965068149",
+          "comment_url": "https://example.com/demo/9b9fc9dfc130",
+          "reply_comments": []
+        }
+      ],
+      "comment_sort": "relevant",
+      "requested_comments": 100,
+      "reported_comment_count": 37,
+      "replay_stop_cause": "has_next_page_false",
+      "comment_window": "Post ipsum",
+      "comments_in_window": 25,
+      "comments_out_of_window": 0,
+      "collection_complete": true,
+      "stop_reason": "window_exhausted"
+    }
+  ]
+}

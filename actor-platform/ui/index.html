@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>actor-platform</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --ink:#e6e9ef; --dim:#9aa3b2; --accent:#4f8cff; --accent2:#2b3547;
+    --ok:#37c76a; --run:#4f8cff; --pend:#c9a227; --fail:#e5534b; --cancel:#a0a6b3; --plat:#d67c1c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none;cursor:pointer}
+  a:hover{text-decoration:underline}
+  header{display:flex;align-items:center;gap:16px;padding:10px 16px;background:var(--panel);
+         border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header h1{font-size:15px;margin:0;font-weight:600;letter-spacing:.02em}
+  header .spacer{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:20px;
+        font-size:12px;background:var(--panel2);border:1px solid var(--line)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+  .dot.up{background:var(--ok)} .dot.down{background:var(--fail)} .dot.warn{background:var(--pend)}
+  input,select,button{font:inherit;color:var(--ink);background:var(--panel2);
+        border:1px solid var(--line);border-radius:6px;padding:6px 9px}
+  input::placeholder{color:var(--dim)}
+  button{cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.danger{background:#2a1c1c;border-color:var(--fail);color:#ffb4ae}
+  nav{display:flex;gap:4px;padding:8px 16px 0}
+  nav button{background:none;border:none;border-bottom:2px solid transparent;border-radius:0;
+       padding:8px 12px;color:var(--dim)}
+  nav button.active{color:var(--ink);border-bottom-color:var(--accent)}
+  main{padding:16px;max-width:1200px;margin:0 auto}
+  .banner{padding:10px 14px;border-radius:8px;margin-bottom:14px;border:1px solid}
+  .banner.err{background:#2a1717;border-color:var(--fail);color:#ffb4ae}
+  .banner.warn{background:#2a2413;border-color:var(--pend);color:#f0d78a}
+  .banner.info{background:#15202e;border-color:var(--accent);color:#bcd4ff}
+  .muted{color:var(--dim)}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .card .n{font-size:26px;font-weight:600}
+  .card .l{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+        border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{background:var(--panel2);font-size:12px;color:var(--dim);text-transform:uppercase;
+     letter-spacing:.03em;cursor:pointer;user-select:none}
+  tbody tr:hover{background:var(--panel2)}
+  td.mono,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11.5px;font-weight:600}
+  .b-SUCCEEDED{background:#123a22;color:var(--ok)}
+  .b-RUNNING{background:#132a4d;color:var(--run)}
+  .b-PENDING{background:#3a3312;color:var(--pend)}
+  .b-FAILED{background:#3a1614;color:var(--fail)}
+  .b-CANCELLED{background:#25282e;color:var(--cancel)}
+  .b-PLATFORM_ERROR{background:#3a2712;color:var(--plat)}
+  .b-PARTIAL{background:#2a2438;color:#c3b6e8}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+  .detail-grid{display:grid;grid-template-columns:160px 1fr;gap:6px 14px;margin:8px 0}
+  .detail-grid .k{color:var(--dim)}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px;
+      overflow:auto;max-height:340px;font-size:12.5px;margin:6px 0 0}
+  h2{font-size:16px;margin:2px 0 12px} h3{font-size:13px;margin:16px 0 4px;color:var(--dim);
+     text-transform:uppercase;letter-spacing:.04em}
+  .empty{padding:26px;text-align:center;color:var(--dim)}
+  .row-gap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .toast{position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid var(--line);
+         border-radius:8px;padding:10px 14px;max-width:360px;z-index:20}
+  .toast.err{border-color:var(--fail)} .toast.ok{border-color:var(--ok)}
+</style>
+</head>
+<body>
+<header>
+  <h1>actor-platform</h1>
+  <span class="pill"><span id="apiDot" class="dot"></span><span id="apiText">connecting…</span></span>
+  <span class="pill muted" id="authText">auth: ?</span>
+  <div class="spacer"></div>
+  <input id="keyInput" type="password" placeholder="API key" style="width:230px" autocomplete="off">
+  <button id="keySave">Use key</button>
+</header>
+
+<nav id="tabs">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="collectors">Collectors</button>
+  <button data-tab="runs">Runs</button>
+</nav>
+
+<main>
+  <div id="globalBanner"></div>
+  <section id="view"></section>
+</main>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+// ---------------------------------------------------------------------------
+// THIN CLIENT. Every datum comes from the platform API; this file holds no
+// platform logic and no state that the Registry is the source of truth for.
+// The only local state is UI concerns: which tab, which run, and the API key
+// the operator pastes in (kept in sessionStorage, never sent anywhere but the
+// Authorization header).
+// ---------------------------------------------------------------------------
+const KEY_STORE = "actor-platform-key";
+let apiKey = sessionStorage.getItem(KEY_STORE) || "";
+let currentTab = "overview";
+let currentRunId = null;
+let poller = null;           // setTimeout handle for the active view
+const POLL_LIST_MS = 5000;   // overview / collectors / runs
+const POLL_RUN_MS = 2000;    // a single active run only
+
+const $ = (sel, root=document) => root.querySelector(sel);
+const el = (tag, props={}, ...kids) => {
+  const n = Object.assign(document.createElement(tag), props);
+  for (const k of kids) n.append(k?.nodeType ? k : document.createTextNode(k ?? ""));
+  return n;
+};
+const esc = (s) => (s ?? "").toString();
+const ACTIVE = new Set(["PENDING","RUNNING"]);
+const CANCELLABLE = ACTIVE;
+const STATUSES = ["PENDING","RUNNING","SUCCEEDED","FAILED","CANCELLED","PLATFORM_ERROR"];
+
+function fmtTime(iso){
+  if(!iso) return "—";
+  const d = new Date(iso);
+  if(isNaN(d)) return iso;
+  return d.toLocaleString(undefined,{month:"short",day:"2-digit",hour:"2-digit",
+    minute:"2-digit",second:"2-digit"});
+}
+function fmtDur(s){ return (s==null) ? "—" : (s < 60 ? s.toFixed(1)+"s" : Math.floor(s/60)+"m"+Math.round(s%60)+"s"); }
+function badge(status){ return el("span",{className:"badge b-"+esc(status)}, status); }
+
+function toast(msg, kind=""){
+  const t = $("#toast");
+  const box = el("div",{className:"toast "+kind}, msg);
+  t.append(box);
+  setTimeout(()=>box.remove(), 4200);
+}
+
+// --- the one and only place the network is touched -------------------------
+async function api(path, {method="GET", auth=true, raw=false}={}){
+  const headers = {};
+  if(auth && apiKey) headers["Authorization"] = "Bearer "+apiKey;
+  let resp;
+  try{
+    resp = await fetch(path, {method, headers});
+  }catch(e){
+    const err = new Error("API unreachable"); err.kind = "network"; throw err;
+  }
+  if(resp.status === 401){ const e=new Error("authentication required"); e.kind="401"; throw e; }
+  if(resp.status === 403){ const e=new Error("insufficient scope");     e.kind="403"; throw e; }
+  if(resp.status === 503){ const e=new Error("auth not configured");    e.kind="503"; throw e; }
+  if(raw){
+    const text = await resp.text();
+    if(!resp.ok){ const e=new Error(text||resp.statusText); e.kind=String(resp.status); e.status=resp.status; throw e; }
+    return text;
+  }
+  let body = null;
+  try{ body = await resp.json(); }catch(_){ body = null; }
+  if(!resp.ok){
+    const e = new Error((body && body.error) || resp.statusText || "request failed");
+    e.kind = String(resp.status); e.status = resp.status; e.body = body; throw e;
+  }
+  return body;
+}
+
+// --- global banner for auth / connectivity ---------------------------------
+function setBanner(kind, msg){
+  const b = $("#globalBanner");
+  b.innerHTML = "";
+  if(msg) b.append(el("div",{className:"banner "+kind}, msg));
+}
+function handleGlobalError(e){
+  if(e.kind === "network"){ setApi("down","API unreachable"); setBanner("err","Cannot reach the API. Is the server running?"); return true; }
+  if(e.kind === "401"){ setBanner("warn","Authentication required — paste an API key above."); return true; }
+  if(e.kind === "503"){ setBanner("warn","The API has no keys configured (auth not configured)."); return true; }
+  return false; // not a global concern; caller handles (e.g. 403 on cancel)
+}
+
+// --- health pill (public endpoint, no key needed) --------------------------
+function setApi(state, text){
+  const dot = $("#apiDot");
+  dot.className = "dot " + (state==="up"?"up":state==="warn"?"warn":state==="down"?"down":"");
+  $("#apiText").textContent = text;
+}
+async function refreshHealth(){
+  try{
+    const h = await api("/health", {auth:true});
+    setApi(h.status==="ok"?"up":"warn", "API "+h.status);
+    $("#authText").textContent = "auth: "+(h.auth ?? "?");
+    return h;
+  }catch(e){
+    if(e.kind==="network"){ setApi("down","API unreachable"); }
+    else { setApi("warn","API up"); $("#authText").textContent="auth: enforced"; }
+    throw e;
+  }
+}
+
+// ===========================================================================
+// VIEWS
+// ===========================================================================
+function stopPolling(){ if(poller){ clearTimeout(poller); poller = null; } }
+function schedule(fn, ms){ stopPolling(); poller = setTimeout(fn, ms); }
+
+// --- Overview --------------------------------------------------------------
+async function renderOverview(){
+  try{
+    const h = await refreshHealth();
+    let metrics = null;
+    try{ metrics = await api("/metrics"); }
+    catch(e){ if(handleGlobalError(e)) { scheduleIfActive(renderOverview,POLL_LIST_MS); return; } throw e; }
+    setBanner("", "");
+
+    const counts = metrics.runs_by_status || {};
+    const view = $("#view"); view.innerHTML = "";
+    view.append(el("h2",{},"Platform overview"));
+
+    const q = metrics.queue || {};
+    const top = el("div",{className:"grid"});
+    top.append(card("Queued", q.queued ?? "—"));
+    top.append(card("Leased", q.leased ?? "—"));
+    top.append(card("Active", metrics.active_runs ?? "—"));
+    view.append(top);
+
+    view.append(el("h3",{},"Runs by status"));
+    const g = el("div",{className:"grid"});
+    for(const st of STATUSES) g.append(card(st, counts[st] ?? 0, "b-"+st));
+    view.append(g);
+    view.append(el("p",{className:"muted"},
+      `Counts over the ${metrics.scanned} most recent run(s) (window ${metrics.window}); queue figures are live.`));
+  }catch(e){
+    if(!handleGlobalError(e)) setBanner("err","Overview error: "+esc(e.message));
+  }
+  scheduleIfActive(renderOverview, POLL_LIST_MS);
+}
+function card(label, n, badgeClass){
+  const c = el("div",{className:"card"});
+  c.append(el("div",{className:"n"+(badgeClass?" "+badgeClass:"")}, esc(n)));
+  c.append(el("div",{className:"l"}, label));
+  return c;
+}
+
+// --- Collectors ------------------------------------------------------------
+async function renderCollectors(){
+  try{
+    const data = await api("/collectors");
+    setBanner("","");
+    const view = $("#view"); view.innerHTML = "";
+    view.append(el("h2",{},"Collectors"));
+    if(!data.collectors || data.collectors.length===0){
+      view.append(el("div",{className:"empty"},"No collector activity in the current window.")); 
+      scheduleIfActive(renderCollectors, POLL_LIST_MS); return;
+    }
+    const t = el("table");
+    t.append(headRow(["Collector","Last run","When","Last success","Last failure","Success rate","Total"]));
+    const tb = el("tbody");
+    for(const c of data.collectors){
+      const rate = c.success_rate==null ? "—" : (c.success_rate*100).toFixed(0)+"%";
+      const last = (c.last_run||{});
+      tb.append(el("tr",{},
+        td(c.collector,"mono"),
+        tdNode(last.status?badge(last.status):document.createTextNode("—")),
+        td(fmtTime(last.at)),
+        td(fmtTime(c.last_success_at)),
+        td(fmtTime(c.last_failure_at)),
+        td(rate),
+        td(esc(c.total))
+      ));
+    }
+    t.append(tb); view.append(t);
+    view.append(el("p",{className:"muted"},`Derived from the ${data.window}-run window.`));
+  }catch(e){
+    if(!handleGlobalError(e)) setBanner("err","Collectors error: "+esc(e.message));
+  }
+  scheduleIfActive(renderCollectors, POLL_LIST_MS);
+}
+
+// --- Runs list -------------------------------------------------------------
+const runsState = { actor:"", status:"", limit:50, sortKey:"created_at", sortDir:-1, rows:[] };
+async function renderRuns(){
+  try{
+    const params = new URLSearchParams();
+    if(runsState.actor) params.set("actor", runsState.actor);
+    if(runsState.status) params.set("status", runsState.status);
+    params.set("limit", runsState.limit);
+    const data = await api("/runs?"+params.toString());
+    runsState.rows = data.runs || [];
+    setBanner("","");
+    drawRuns();
+  }catch(e){
+    if(!handleGlobalError(e)) setBanner("err","Runs error: "+esc(e.message));
+  }
+  scheduleIfActive(renderRuns, POLL_LIST_MS);
+}
+function drawRuns(){
+  const view = $("#view"); view.innerHTML = "";
+  view.append(el("h2",{},"Runs"));
+
+  const filters = el("div",{className:"filters"});
+  const actorSel = el("input",{value:runsState.actor,placeholder:"filter collector…",style:"width:170px"});
+  actorSel.addEventListener("change",()=>{ runsState.actor=actorSel.value.trim(); renderRuns(); });
+  const statusSel = el("select");
+  statusSel.append(el("option",{value:""},"all statuses"));
+  for(const s of STATUSES) statusSel.append(el("option",{value:s,selected:runsState.status===s}, s));
+  statusSel.addEventListener("change",()=>{ runsState.status=statusSel.value; renderRuns(); });
+  const limitSel = el("select");
+  for(const n of [25,50,100,200]) limitSel.append(el("option",{value:n,selected:runsState.limit===n}, n+" rows"));
+  limitSel.addEventListener("change",()=>{ runsState.limit=+limitSel.value; renderRuns(); });
+  filters.append(el("span",{className:"muted"},"Filter:"),actorSel,statusSel,limitSel);
+  view.append(filters);
+
+  if(runsState.rows.length===0){
+    view.append(el("div",{className:"empty"},"No runs match.")); return;
+  }
+  const cols = [["run_id","Run"],["actor","Collector"],["status","Status"],
+    ["created_at","Created"],["started_at","Started"],["finished_at","Finished"],
+    ["duration_seconds","Duration"],["exit_code","Exit"]];
+  const t = el("table");
+  const hr = el("tr");
+  for(const [key,label] of cols){
+    const arrow = runsState.sortKey===key ? (runsState.sortDir<0?" ▾":" ▴") : "";
+    const th = el("th",{},label+arrow);
+    th.addEventListener("click",()=>{
+      if(runsState.sortKey===key) runsState.sortDir*=-1; else {runsState.sortKey=key;runsState.sortDir=-1;}
+      drawRuns();
+    });
+    hr.append(th);
+  }
+  t.append(el("thead",{},hr));
+  const rows = runsState.rows.slice().sort((a,b)=>{
+    const k=runsState.sortKey; let av=a[k], bv=b[k];
+    av = av==null?"":av; bv = bv==null?"":bv;
+    return (av<bv?-1:av>bv?1:0)*runsState.sortDir;
+  });
+  const tb = el("tbody");
+  for(const r of rows){
+    const idLink = el("a",{className:"mono"}, r.run_id.slice(0,21));
+    idLink.addEventListener("click",()=>openRun(r.run_id));
+    tb.append(el("tr",{},
+      tdNode(idLink),
+      td(r.actor,"mono"),
+      tdNode(badge(r.status)),
+      td(fmtTime(r.created_at)),
+      td(fmtTime(r.started_at)),
+      td(fmtTime(r.finished_at)),
+      td(fmtDur(r.duration_seconds)),
+      td(r.exit_code==null?"—":esc(r.exit_code))
+    ));
+  }
+  t.append(tb); view.append(t);
+}
+
+// --- Run detail ------------------------------------------------------------
+async function openRun(runId){
+  currentTab = "run"; currentRunId = runId;
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.remove("active"));
+  await renderRun();
+}
+async function renderRun(){
+  const runId = currentRunId;
+  let run;
+  try{
+    run = await api("/runs/"+runId);
+    setBanner("","");
+  }catch(e){
+    if(handleGlobalError(e)) { return; }
+    setBanner("err","Run error: "+esc(e.message));
+    return;
+  }
+  const view = $("#view"); view.innerHTML = "";
+  const back = el("a",{},"← all runs"); back.addEventListener("click",()=>selectTab("runs"));
+  view.append(el("div",{className:"row-gap"}, back));
+
+  const head = el("div",{className:"row-gap",style:"margin:10px 0"});
+  head.append(el("h2",{style:"margin:0"}, run.actor+" run"));
+  head.append(badge(run.status));
+  // "FAILED" and "FAILED - PARTIAL" are different outcomes to an operator: the
+  // second one has an output worth fetching. Shown beside the status badge
+  // rather than buried in the grid, because it changes what you do next.
+  if(run.partial){ head.append(el("span",{className:"badge b-PARTIAL"},"PARTIAL")); }
+  if(CANCELLABLE.has(run.status)){
+    const btn = el("button",{className:"danger"},"Cancel run");
+    btn.addEventListener("click",()=>cancelRun(runId, btn));
+    head.append(btn);
+  }
+  view.append(head);
+
+  const g = el("div",{className:"detail-grid"});
+  const put=(k,v)=>{ g.append(el("div",{className:"k"},k)); g.append(el("div",{className:"mono"}, v)); };
+  put("Run ID", run.run_id);
+  put("Collector", run.actor);
+  put("Status", run.status);
+  put("Created", fmtTime(run.created_at));
+  put("Started", fmtTime(run.started_at));
+  put("Finished", fmtTime(run.finished_at));
+  put("Duration", fmtDur(run.duration_seconds));
+  put("Exit code", run.exit_code==null?"—":String(run.exit_code));
+  put("Attempts", String(run.attempts ?? "—"));
+  put("Log lines", String(run.log_lines ?? "—"));
+  view.append(g);
+  // The failure, spelled out. Before this the whole diagnosis was one free-text
+  // line, so telling a rate limit from a parser bug meant opening the container
+  // log. error_info carries the category, whether a retry could help and which
+  // stage failed; `error` is still rendered underneath as the sentence.
+  const info = run.error_info;
+  if(info){
+    const box = el("div",{className:"banner err"});
+    box.append(el("div",{style:"font-weight:600;margin-bottom:6px"},
+      String(info.code||"ERROR") + (info.detail ? " / "+info.detail : "")));
+    if(info.message){ box.append(el("div",{style:"white-space:pre-wrap"}, info.message)); }
+    const facts=[];
+    if(info.stage) facts.push("stage: "+info.stage);
+    facts.push("retryable: "+(info.retryable?"yes":"no"));
+    if(info.retry_after_seconds!=null) facts.push("retry after: "+info.retry_after_seconds+"s");
+    if(run.attempts) facts.push("attempts: "+run.attempts);
+    box.append(el("div",{className:"muted",style:"margin-top:6px"}, facts.join("  ·  ")));
+    view.append(box);
+  }
+  if(run.error){ view.append(el("div",{className:"banner err",style:"white-space:pre-wrap"}, run.error)); }
+
+  await section(view,"Input","/runs/"+runId+"/input","json");
+  await section(view,"Output","/runs/"+runId+"/output","json");
+  await section(view,"Logs","/runs/"+runId+"/logs","text");
+
+  // Refresh ONLY while the run is still active. A terminal run never polls.
+  if(ACTIVE.has(run.status)) schedule(renderRun, POLL_RUN_MS);
+  else stopPolling();
+}
+async function section(view, title, path, kind){
+  view.append(el("h3",{}, title));
+  try{
+    if(kind==="text"){
+      const txt = await api(path,{raw:true});
+      view.append(el("pre",{}, txt || "(empty)"));
+    }else{
+      const data = await api(path);
+      view.append(el("pre",{}, JSON.stringify(data,null,2)));
+    }
+  }catch(e){
+    if(e.kind==="404"){
+      const why = (e.body && e.body.status) ? " (run is "+e.body.status+")" : "";
+      view.append(el("pre",{className:"muted"}, "No "+title.toLowerCase()+" available"+why));
+    }else if(handleGlobalError(e)){ /* banner shown */ }
+    else view.append(el("pre",{className:"muted"}, "Could not load "+title.toLowerCase()+": "+esc(e.message)));
+  }
+}
+
+// --- Cancel: record intent, then RE-RENDER FROM THE API (never optimistic) --
+async function cancelRun(runId, btn){
+  btn.disabled = true; btn.textContent = "Cancelling…";
+  try{
+    const res = await api("/runs/"+runId+"/cancel", {method:"POST"});
+    if(res.already) toast("Run was already cancelled.","");
+    else toast("Cancellation requested.","ok");
+  }catch(e){
+    if(e.kind==="409"){
+      const st = (e.body && e.body.detail) ? "" : "";
+      toast("Too late — the run already finished. "+esc(e.message), "err");
+    }else if(e.kind==="403"){
+      toast("This key lacks the 'run' scope needed to cancel.","err");
+    }else if(handleGlobalError(e)){
+      toast("Cancel failed: API problem.","err");
+    }else{
+      toast("Cancel failed: "+esc(e.message),"err");
+    }
+  }finally{
+    // Always reconcile the UI with the Registry-backed API, never force state.
+    await renderRun();
+  }
+}
+
+// --- table helpers ---------------------------------------------------------
+function headRow(labels){ const tr=el("tr"); for(const l of labels) tr.append(el("th",{},l)); return el("thead",{},tr); }
+function td(text, cls){ return el("td",{className:cls||""}, esc(text)); }
+function tdNode(node){ const d=el("td",{}); d.append(node); return d; }
+
+// --- tab machinery ---------------------------------------------------------
+function scheduleIfActive(fn, ms){ if(currentTab === fnTab(fn)) schedule(fn, ms); }
+function fnTab(fn){ return fn===renderOverview?"overview":fn===renderCollectors?"collectors":fn===renderRuns?"runs":"run"; }
+
+function selectTab(tab){
+  currentTab = tab; currentRunId = null; stopPolling();
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("active", b.dataset.tab===tab));
+  if(tab==="overview") renderOverview();
+  else if(tab==="collectors") renderCollectors();
+  else if(tab==="runs") renderRuns();
+}
+
+// --- boot ------------------------------------------------------------------
+document.querySelectorAll("#tabs button").forEach(b=>{
+  b.addEventListener("click",()=>selectTab(b.dataset.tab));
+});
+$("#keyInput").value = apiKey;
+$("#keySave").addEventListener("click",()=>{
+  apiKey = $("#keyInput").value.trim();
+  sessionStorage.setItem(KEY_STORE, apiKey);
+  toast(apiKey ? "Key set." : "Key cleared.", "ok");
+  selectTab(currentTab==="run"?"runs":currentTab);
+});
+$("#keyInput").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#keySave").click(); });
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden) stopPolling();
+  else selectTab(currentTab==="run"?"runs":currentTab);
+});
+
+refreshHealth().catch(()=>{});
+selectTab("overview");
+</script>
+</body>
+</html>
