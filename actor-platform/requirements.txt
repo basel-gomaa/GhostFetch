@@ -24,7 +24,7 @@ cryptography>=42
 
 # The database. Plain SQL, no ORM -- the transition guard is one UPDATE and is
 # the part a reader most needs to see unobscured.
-psycopg[binary,pool]>=3.2
+psycopg[binary,pool]>=3.3.8
 
 # Password hashing for user accounts. argon2id, the current recommendation; used
 # ONLY for passwords (API keys are 256-bit random, so they get a fast sha256).
