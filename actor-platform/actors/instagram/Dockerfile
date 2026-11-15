@@ -15,7 +15,7 @@
 # keeps the system libraries and the browser build in step -- a hand-rolled
 # install drifts and fails at run time, inside a container, with a stack trace
 # about a missing shared object.
-FROM mcr.microsoft.com/playwright/python:v1.64.1-noble
+FROM mcr.microsoft.com/playwright/python:v1.65.1-noble
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
