@@ -4,7 +4,7 @@
 #
 # The executor, registry and `runs` CLI remain standard-library only and run
 # under a plain python3. Only the API needs these.
-fastapi>=0.162.0
+fastapi>=0.162.2
 uvicorn>=0.30
 
 # Validates submitted input against each Actor's declared input_schema.json, so
