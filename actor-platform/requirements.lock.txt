@@ -23,7 +23,7 @@ psycopg==3.3.9
 psycopg-binary==3.3.8
 psycopg-pool==3.3.3
 pycparser==3.12
-pydantic==2.14.1
+pydantic==2.14.3
 pydantic-core==2.50.1
 redis==8.1.0
 referencing==0.37.0
